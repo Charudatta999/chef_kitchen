@@ -8,6 +8,11 @@ namespace LRU
         usageOrder_ = std::make_unique<LinkedList::DoublelyLinkedList>();
     }
 
+    size_t Lru::GetUsageOrderSize()
+    {
+        return usageOrder_->GetSize();
+    }
+    
     bool Lru::HasCapacity()
     {
         if(capacity_ >= usageOrder_->GetSize())
@@ -17,25 +22,48 @@ namespace LRU
         return false;
     }
 
-    bool Lru::IsPresent(int key) const
+    bool Lru::IsKeyValuePresent(int key, const std::string& value) const
     {
         if(usageOrder_->GetSize() == 0 && capacity_ == 0)
         {
             return false;
         }
-        if(usageOrder_->GetNode(key))
+        if(index_.count(key) && value == index_.at(key)->val_)
         {
             return true;
         }
+        return false;
     }
 
+    bool Lru::Evict()
+    {
+        LinkedList::DoubleLL* tailNode = usageOrder_->GetTail();
+        if(tailNode != nullptr)
+        {
+            index_.erase(tailNode->key_);
+            usageOrder_->RemoveTail();
+            return true; 
+        }
+        return false;
+    }
     bool Lru::Put(int key, const std::string& value)
     {
-        if(IsPresent(key))
+        if(IsKeyValuePresent(key,value))
         {
-            std::cerr << "Key already present" << std::endl;
+            std::cerr << "Key and value already present" << std::endl;
             return false;
         }
+        if(usageOrder_->GetSize() >= capacity_)
+        {
+            std::cout << " Capacity is Full evicting key" << std::endl;
+
+            if(!Evict())
+            {
+                std::cout << "Eviction failed" << std::endl;
+                return false;
+            }
+        }
+
         index_[key] = usageOrder_->AddNodeFront(key, value);
         if(index_[key])
         {
@@ -47,7 +75,7 @@ namespace LRU
 
     bool Lru::Get(int key, std::string& value)
     {
-        if(!IsPresent(key))
+        if(index_.count(key) == 0)
         {
             std::cerr << "No such key present" << std::endl;
             return false;   
@@ -65,6 +93,7 @@ namespace LRU
 
         return true;
     }
+
     const std::string Lru::Get(int key)
     {
         std::string value{""};
@@ -75,5 +104,16 @@ namespace LRU
         return value;
     }
 
+    void Lru::ClearCache()
+    {
+        usageOrder_->Clear();
+        index_.clear();
+        std::cout << "Cache Cleared" << std::endl;
+    }
+
+    size_t Lru::GetCacheSize()
+    {
+        return capacity_;
+    }
 
 }
