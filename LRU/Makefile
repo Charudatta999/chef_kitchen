@@ -11,12 +11,12 @@ BIN_DIR = bin
 TEST_DIR = test
 
 # Source files
-SRCS = $(SRC_DIR)/DoubleLL.cpp $(SRC_DIR)/DoublelyLinkedList.cpp
-TEST_SRC = $(TEST_DIR)/DoublelyLinkedListTest.cpp
+SRCS = $(SRC_DIR)/DoubleLL.cpp $(SRC_DIR)/DoublelyLinkedList.cpp $(SRC_DIR)/Lru.cpp
+TEST_SRCS = $(TEST_DIR)/maintest.cpp $(TEST_DIR)/DoublelyLinkedListTest.cpp $(TEST_DIR)/LruTests.cpp
 
 # Object files
 OBJS = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
-TEST_OBJ = $(OBJ_DIR)/DoublelyLinkedListTest.o
+TEST_OBJS = $(patsubst $(TEST_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(TEST_SRCS))
 
 # Executable
 TEST_EXEC = $(BIN_DIR)/run_tests
@@ -25,15 +25,27 @@ TEST_EXEC = $(BIN_DIR)/run_tests
 all: $(TEST_EXEC)
 
 # Link test executable
-$(TEST_EXEC): $(OBJS) $(TEST_OBJ) | $(BIN_DIR)
+$(TEST_EXEC): $(OBJS) $(TEST_OBJS) | $(BIN_DIR)
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
-# Compile source files to object files
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
+# Compile source files to object files with explicit dependencies
+$(OBJ_DIR)/DoubleLL.o: $(SRC_DIR)/DoubleLL.cpp $(INC_DIR)/DoubleLL.hpp | $(OBJ_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Compile test file to object file
-$(OBJ_DIR)/DoublelyLinkedListTest.o: $(TEST_DIR)/DoublelyLinkedListTest.cpp | $(OBJ_DIR)
+$(OBJ_DIR)/DoublelyLinkedList.o: $(SRC_DIR)/DoublelyLinkedList.cpp $(INC_DIR)/DoublelyLinkedList.hpp $(INC_DIR)/DoubleLL.hpp | $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/Lru.o: $(SRC_DIR)/Lru.cpp $(INC_DIR)/Lru.hpp $(INC_DIR)/DoublelyLinkedList.hpp | $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Compile test files to object files with explicit dependencies
+$(OBJ_DIR)/maintest.o: $(TEST_DIR)/maintest.cpp | $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/DoublelyLinkedListTest.o: $(TEST_DIR)/DoublelyLinkedListTest.cpp $(INC_DIR)/DoublelyLinkedList.hpp | $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/LruTests.o: $(TEST_DIR)/LruTests.cpp $(INC_DIR)/Lru.hpp | $(OBJ_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Create directories
@@ -53,16 +65,16 @@ clean:
 
 # Code coverage with gcov
 coverage: test
-	mkdir gcovr_output
-	$(CXX) $(CXXFLAGS) --coverage -o $(BIN_DIR)/coverage_test $(OBJS) $(TEST_OBJ) $(LDFLAGS)
+	mkdir -p gcovr_output
+	$(CXX) $(CXXFLAGS) --coverage -o $(BIN_DIR)/coverage_test $(OBJS) $(TEST_OBJS) $(LDFLAGS)
 	./$(BIN_DIR)/coverage_test
-	gcov $(OBJ_DIR)/DoublelyLinkedList.o $(OBJ_DIR)/DoubleLL.o $(OBJ_DIR)/DoublelyLinkedListTest.o
-	gcovr --html --output ./gcovr_output/coverage_report.html 
+	gcov $(OBJS)
+	gcovr --html --output ./gcovr_output/coverage_report.html
 	mv *.gcov ./gcovr_output
 
 # Generate lcov report
 lcov_report: test
 	lcov --capture --directory . --output-file ./gcovr_output/coverage.info
-	genhtml ./gcovr_output/coverage.info --output-directory ./gcovr_output/ 
+	genhtml ./gcovr_output/coverage.info --output-directory ./gcovr_output/
 
 .PHONY: all test clean coverage lcov_report
