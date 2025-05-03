@@ -1,0 +1,9 @@
+        -:    0:Source:src/DoubleLL.cpp
+        -:    1:#include "../inc/DoubleLL.hpp"
+        -:    2:
+        -:    3:namespace LinkedList
+        -:    4:{
+       58:    5:    DoubleLL::DoubleLL(int key, std::string val, DoubleLL* next , DoubleLL* prev): key_(key), val_(val), next_(next), prev_(prev)
+       58:    6:    {}
+       58:    7:    DoubleLL::~DoubleLL(){};
+        -:    8:}

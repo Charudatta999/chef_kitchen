@@ -1,0 +1,680 @@
+        -:    0:Source:test/DoublelyLinkedListTest.cpp
+        -:    1:#include <gtest/gtest.h>
+        -:    2:#include "../inc/DoublelyLinkedList.hpp"
+        -:    3:
+        -:    4:namespace LinkedList {
+        -:    5:
+        -:    6:class DoublelyLinkedListTest : public ::testing::Test {
+        -:    7:protected:
+        -:    8:    DoublelyLinkedList list;
+        -:    9:
+        -:   10:    // Helper function to verify list integrity
+       50:   11:    void VerifyList() {
+        -:   12:        // Check size matches actual node count
+       50:   13:        size_t count = 0;
+       50:   14:        DoubleLL* current = list.GetHead();
+      164:   15:        while (current) {
+      114:   16:            ++count;
+      114:   17:            current = current->next_;
+        -:   18:        }
+      50*:   19:        EXPECT_EQ(list.GetSize(), count);
+        -:   20:
+        -:   21:        // Verify head and tail pointers
+       50:   22:        if (list.GetSize() == 0) {
+       6*:   23:            EXPECT_EQ(list.GetHead(), nullptr);
+       6*:   24:            EXPECT_EQ(list.GetTail(), nullptr);
+        -:   25:        } else {
+      44*:   26:            EXPECT_NE(list.GetHead(), nullptr);
+      44*:   27:            EXPECT_NE(list.GetTail(), nullptr);
+      44*:   28:            EXPECT_EQ(list.GetHead()->prev_, nullptr);
+      44*:   29:            EXPECT_EQ(list.GetTail()->next_, nullptr);
+        -:   30:        }
+        -:   31:
+        -:   32:        // Verify prev/next pointers
+       50:   33:        current = list.GetHead();
+      120:   34:        while (current && current->next_) {
+      70*:   35:            EXPECT_EQ(current->next_->prev_, current);
+       70:   36:            current = current->next_;
+        -:   37:        }
+       50:   38:        current = list.GetTail();
+      120:   39:        while (current && current->prev_) {
+      70*:   40:            EXPECT_EQ(current->prev_->next_, current);
+       70:   41:            current = current->prev_;
+        -:   42:        }
+       50:   43:    }
+        -:   44:
+        -:   45:    // Helper to verify node content
+      132:   46:    void VerifyNode(DoubleLL* node, int key, const std::string& val) {
+     132*:   47:        ASSERT_NE(node, nullptr);
+     132*:   48:        EXPECT_EQ(node->key_, key);
+     132*:   49:        EXPECT_EQ(node->val_, val);
+        -:   50:    }
+        -:   51:
+        -:   52:    // Helper to check list nodes in order
+       34:   53:    void VerifyListContent(const std::vector<std::pair<int, std::string>>& expected) {
+       34:   54:        DoubleLL* current = list.GetHead();
+      130:   55:        for (const auto& [key, val] : expected) {
+      96*:   56:            ASSERT_NE(current, nullptr);
+       96:   57:            VerifyNode(current, key, val);
+       96:   58:            current = current->next_;
+        -:   59:        }
+      34*:   60:        EXPECT_EQ(current, nullptr); // Ensure no extra nodes
+        -:   61:    }
+        -:   62:};
+        -:   63:
+        -:   64:// Test constructor
+        8:   65:TEST_F(DoublelyLinkedListTest, Constructor) {
+       2*:   66:    EXPECT_EQ(list.GetSize(), 0);
+       2*:   67:    EXPECT_EQ(list.GetHead(), nullptr);
+       2*:   68:    EXPECT_EQ(list.GetTail(), nullptr);
+        2:   69:    VerifyList();
+        2:   70:}
+------------------
+_ZN10LinkedList39DoublelyLinkedListTest_Constructor_TestC2Ev:
+        2:   65:TEST_F(DoublelyLinkedListTest, Constructor) {
+------------------
+_ZN10LinkedList39DoublelyLinkedListTest_Constructor_TestD0Ev:
+        2:   65:TEST_F(DoublelyLinkedListTest, Constructor) {
+------------------
+_ZN10LinkedList39DoublelyLinkedListTest_Constructor_TestD2Ev:
+        2:   65:TEST_F(DoublelyLinkedListTest, Constructor) {
+------------------
+_ZN10LinkedList39DoublelyLinkedListTest_Constructor_Test8TestBodyEv:
+        2:   65:TEST_F(DoublelyLinkedListTest, Constructor) {
+       2*:   66:    EXPECT_EQ(list.GetSize(), 0);
+       2*:   67:    EXPECT_EQ(list.GetHead(), nullptr);
+       2*:   68:    EXPECT_EQ(list.GetTail(), nullptr);
+        2:   69:    VerifyList();
+        2:   70:}
+------------------
+        -:   71:
+        -:   72:// Test AddNode (append)
+        8:   73:TEST_F(DoublelyLinkedListTest, AddNode) {
+        -:   74:    // Empty list
+       2*:   75:    EXPECT_TRUE(list.AddNode(1, "one"));
+       2*:   76:    EXPECT_EQ(list.GetSize(), 1);
+        2:   77:    VerifyNode(list.GetHead(), 1, "one");
+        2:   78:    VerifyNode(list.GetTail(), 1, "one");
+        2:   79:    VerifyList();
+        -:   80:
+        -:   81:    // Add to non-empty list
+       2*:   82:    EXPECT_TRUE(list.AddNode(2, "two"));
+       2*:   83:    EXPECT_EQ(list.GetSize(), 2);
+        2:   84:    VerifyNode(list.GetHead(), 1, "one");
+        2:   85:    VerifyNode(list.GetTail(), 2, "two");
+        6:   86:    VerifyListContent({{1, "one"}, {2, "two"}});
+        2:   87:    VerifyList();
+        4:   88:}
+------------------
+_ZN10LinkedList35DoublelyLinkedListTest_AddNode_TestC2Ev:
+        2:   73:TEST_F(DoublelyLinkedListTest, AddNode) {
+------------------
+_ZN10LinkedList35DoublelyLinkedListTest_AddNode_TestD0Ev:
+        2:   73:TEST_F(DoublelyLinkedListTest, AddNode) {
+------------------
+_ZN10LinkedList35DoublelyLinkedListTest_AddNode_TestD2Ev:
+        2:   73:TEST_F(DoublelyLinkedListTest, AddNode) {
+------------------
+_ZN10LinkedList35DoublelyLinkedListTest_AddNode_Test8TestBodyEv:
+        2:   73:TEST_F(DoublelyLinkedListTest, AddNode) {
+        -:   74:    // Empty list
+       2*:   75:    EXPECT_TRUE(list.AddNode(1, "one"));
+       2*:   76:    EXPECT_EQ(list.GetSize(), 1);
+        2:   77:    VerifyNode(list.GetHead(), 1, "one");
+        2:   78:    VerifyNode(list.GetTail(), 1, "one");
+        2:   79:    VerifyList();
+        -:   80:
+        -:   81:    // Add to non-empty list
+       2*:   82:    EXPECT_TRUE(list.AddNode(2, "two"));
+       2*:   83:    EXPECT_EQ(list.GetSize(), 2);
+        2:   84:    VerifyNode(list.GetHead(), 1, "one");
+        2:   85:    VerifyNode(list.GetTail(), 2, "two");
+        6:   86:    VerifyListContent({{1, "one"}, {2, "two"}});
+        2:   87:    VerifyList();
+        4:   88:}
+------------------
+        -:   89:
+        -:   90:// Test AddNodeFront
+        8:   91:TEST_F(DoublelyLinkedListTest, AddNodeFront) {
+        -:   92:    // Empty list
+       2*:   93:    EXPECT_TRUE(list.AddNodeFront(1, "one"));
+       2*:   94:    EXPECT_EQ(list.GetSize(), 1);
+        2:   95:    VerifyNode(list.GetHead(), 1, "one");
+        2:   96:    VerifyNode(list.GetTail(), 1, "one");
+        2:   97:    VerifyList();
+        -:   98:
+        -:   99:    // Non-empty list
+       2*:  100:    EXPECT_TRUE(list.AddNodeFront(2, "two"));
+       2*:  101:    EXPECT_EQ(list.GetSize(), 2);
+        2:  102:    VerifyNode(list.GetHead(), 2, "two");
+        2:  103:    VerifyNode(list.GetTail(), 1, "one");
+        6:  104:    VerifyListContent({{2, "two"}, {1, "one"}});
+        2:  105:    VerifyList();
+        4:  106:}
+------------------
+_ZN10LinkedList40DoublelyLinkedListTest_AddNodeFront_TestC2Ev:
+        2:   91:TEST_F(DoublelyLinkedListTest, AddNodeFront) {
+------------------
+_ZN10LinkedList40DoublelyLinkedListTest_AddNodeFront_TestD0Ev:
+        2:   91:TEST_F(DoublelyLinkedListTest, AddNodeFront) {
+------------------
+_ZN10LinkedList40DoublelyLinkedListTest_AddNodeFront_TestD2Ev:
+        2:   91:TEST_F(DoublelyLinkedListTest, AddNodeFront) {
+------------------
+_ZN10LinkedList40DoublelyLinkedListTest_AddNodeFront_Test8TestBodyEv:
+        2:   91:TEST_F(DoublelyLinkedListTest, AddNodeFront) {
+        -:   92:    // Empty list
+       2*:   93:    EXPECT_TRUE(list.AddNodeFront(1, "one"));
+       2*:   94:    EXPECT_EQ(list.GetSize(), 1);
+        2:   95:    VerifyNode(list.GetHead(), 1, "one");
+        2:   96:    VerifyNode(list.GetTail(), 1, "one");
+        2:   97:    VerifyList();
+        -:   98:
+        -:   99:    // Non-empty list
+       2*:  100:    EXPECT_TRUE(list.AddNodeFront(2, "two"));
+       2*:  101:    EXPECT_EQ(list.GetSize(), 2);
+        2:  102:    VerifyNode(list.GetHead(), 2, "two");
+        2:  103:    VerifyNode(list.GetTail(), 1, "one");
+        6:  104:    VerifyListContent({{2, "two"}, {1, "one"}});
+        2:  105:    VerifyList();
+        4:  106:}
+------------------
+        -:  107:
+        -:  108:// Test AddNode at position
+        8:  109:TEST_F(DoublelyLinkedListTest, AddNodeAtPosition) {
+        -:  110:    // Invalid positions
+       2*:  111:    EXPECT_FALSE(list.AddNode(1, "one", -1));
+       2*:  112:    EXPECT_FALSE(list.AddNode(1, "one", 1));
+       2*:  113:    EXPECT_EQ(list.GetSize(), 0);
+        -:  114:
+        -:  115:    // Position 0 (front)
+       2*:  116:    EXPECT_TRUE(list.AddNode(1, "one", 0));
+       2*:  117:    EXPECT_EQ(list.GetSize(), 1);
+        2:  118:    VerifyNode(list.GetHead(), 1, "one");
+        2:  119:    VerifyNode(list.GetTail(), 1, "one");
+        2:  120:    VerifyList();
+        -:  121:
+        -:  122:    // Position 1 (end)
+       2*:  123:    EXPECT_TRUE(list.AddNode(2, "two", 1));
+       2*:  124:    EXPECT_EQ(list.GetSize(), 2);
+        6:  125:    VerifyListContent({{1, "one"}, {2, "two"}});
+        2:  126:    VerifyList();
+        -:  127:
+        -:  128:    // Position 1 (middle)
+       2*:  129:    EXPECT_TRUE(list.AddNode(3, "three", 1));
+       2*:  130:    EXPECT_EQ(list.GetSize(), 3);
+        8:  131:    VerifyListContent({{1, "one"}, {3, "three"}, {2, "two"}});
+        2:  132:    VerifyList();
+        -:  133:
+        -:  134:    // Position 3 (end)
+       2*:  135:    EXPECT_TRUE(list.AddNode(4, "four", 3));
+       2*:  136:    EXPECT_EQ(list.GetSize(), 4);
+       10:  137:    VerifyListContent({{1, "one"}, {3, "three"}, {2, "two"}, {4, "four"}});
+        2:  138:    VerifyList();
+        8:  139:}
+------------------
+_ZN10LinkedList45DoublelyLinkedListTest_AddNodeAtPosition_TestC2Ev:
+        2:  109:TEST_F(DoublelyLinkedListTest, AddNodeAtPosition) {
+------------------
+_ZN10LinkedList45DoublelyLinkedListTest_AddNodeAtPosition_TestD0Ev:
+        2:  109:TEST_F(DoublelyLinkedListTest, AddNodeAtPosition) {
+------------------
+_ZN10LinkedList45DoublelyLinkedListTest_AddNodeAtPosition_TestD2Ev:
+        2:  109:TEST_F(DoublelyLinkedListTest, AddNodeAtPosition) {
+------------------
+_ZN10LinkedList45DoublelyLinkedListTest_AddNodeAtPosition_Test8TestBodyEv:
+        2:  109:TEST_F(DoublelyLinkedListTest, AddNodeAtPosition) {
+        -:  110:    // Invalid positions
+       2*:  111:    EXPECT_FALSE(list.AddNode(1, "one", -1));
+       2*:  112:    EXPECT_FALSE(list.AddNode(1, "one", 1));
+       2*:  113:    EXPECT_EQ(list.GetSize(), 0);
+        -:  114:
+        -:  115:    // Position 0 (front)
+       2*:  116:    EXPECT_TRUE(list.AddNode(1, "one", 0));
+       2*:  117:    EXPECT_EQ(list.GetSize(), 1);
+        2:  118:    VerifyNode(list.GetHead(), 1, "one");
+        2:  119:    VerifyNode(list.GetTail(), 1, "one");
+        2:  120:    VerifyList();
+        -:  121:
+        -:  122:    // Position 1 (end)
+       2*:  123:    EXPECT_TRUE(list.AddNode(2, "two", 1));
+       2*:  124:    EXPECT_EQ(list.GetSize(), 2);
+        6:  125:    VerifyListContent({{1, "one"}, {2, "two"}});
+        2:  126:    VerifyList();
+        -:  127:
+        -:  128:    // Position 1 (middle)
+       2*:  129:    EXPECT_TRUE(list.AddNode(3, "three", 1));
+       2*:  130:    EXPECT_EQ(list.GetSize(), 3);
+        8:  131:    VerifyListContent({{1, "one"}, {3, "three"}, {2, "two"}});
+        2:  132:    VerifyList();
+        -:  133:
+        -:  134:    // Position 3 (end)
+       2*:  135:    EXPECT_TRUE(list.AddNode(4, "four", 3));
+       2*:  136:    EXPECT_EQ(list.GetSize(), 4);
+       10:  137:    VerifyListContent({{1, "one"}, {3, "three"}, {2, "two"}, {4, "four"}});
+        2:  138:    VerifyList();
+        8:  139:}
+------------------
+        -:  140:
+        -:  141:// Test GetNode by value
+        8:  142:TEST_F(DoublelyLinkedListTest, GetNodeByValue) {
+        -:  143:    // Empty list
+       2*:  144:    EXPECT_EQ(list.GetNode("one"), nullptr);
+        -:  145:
+        -:  146:    // Single node
+        2:  147:    list.AddNode(1, "one");
+        2:  148:    DoubleLL* node = list.GetNode("one");
+        2:  149:    VerifyNode(node, 1, "one");
+       2*:  150:    EXPECT_EQ(list.GetNode("two"), nullptr);
+        -:  151:
+        -:  152:    // Multiple nodes
+        2:  153:    list.AddNode(2, "two");
+        2:  154:    list.AddNode(3, "three");
+        2:  155:    VerifyNode(list.GetNode("one"), 1, "one");
+        2:  156:    VerifyNode(list.GetNode("two"), 2, "two");
+        2:  157:    VerifyNode(list.GetNode("three"), 3, "three");
+       2*:  158:    EXPECT_EQ(list.GetNode("four"), nullptr);
+        2:  159:    VerifyList();
+        2:  160:}
+------------------
+_ZN10LinkedList42DoublelyLinkedListTest_GetNodeByValue_TestC2Ev:
+        2:  142:TEST_F(DoublelyLinkedListTest, GetNodeByValue) {
+------------------
+_ZN10LinkedList42DoublelyLinkedListTest_GetNodeByValue_TestD0Ev:
+        2:  142:TEST_F(DoublelyLinkedListTest, GetNodeByValue) {
+------------------
+_ZN10LinkedList42DoublelyLinkedListTest_GetNodeByValue_TestD2Ev:
+        2:  142:TEST_F(DoublelyLinkedListTest, GetNodeByValue) {
+------------------
+_ZN10LinkedList42DoublelyLinkedListTest_GetNodeByValue_Test8TestBodyEv:
+        2:  142:TEST_F(DoublelyLinkedListTest, GetNodeByValue) {
+        -:  143:    // Empty list
+       2*:  144:    EXPECT_EQ(list.GetNode("one"), nullptr);
+        -:  145:
+        -:  146:    // Single node
+        2:  147:    list.AddNode(1, "one");
+        2:  148:    DoubleLL* node = list.GetNode("one");
+        2:  149:    VerifyNode(node, 1, "one");
+       2*:  150:    EXPECT_EQ(list.GetNode("two"), nullptr);
+        -:  151:
+        -:  152:    // Multiple nodes
+        2:  153:    list.AddNode(2, "two");
+        2:  154:    list.AddNode(3, "three");
+        2:  155:    VerifyNode(list.GetNode("one"), 1, "one");
+        2:  156:    VerifyNode(list.GetNode("two"), 2, "two");
+        2:  157:    VerifyNode(list.GetNode("three"), 3, "three");
+       2*:  158:    EXPECT_EQ(list.GetNode("four"), nullptr);
+        2:  159:    VerifyList();
+        2:  160:}
+------------------
+        -:  161:
+        -:  162:// Test GetNode by key
+        8:  163:TEST_F(DoublelyLinkedListTest, GetNodeByKey) {
+        -:  164:    // Empty list
+       2*:  165:    EXPECT_EQ(list.GetNode(1), nullptr);
+        -:  166:
+        -:  167:    // Single node
+        2:  168:    list.AddNode(1, "one");
+        2:  169:    DoubleLL* node = list.GetNode(1);
+        2:  170:    VerifyNode(node, 1, "one");
+       2*:  171:    EXPECT_EQ(list.GetNode(2), nullptr);
+        -:  172:
+        -:  173:    // Multiple nodes
+        2:  174:    list.AddNode(2, "two");
+        2:  175:    list.AddNode(3, "three");
+        2:  176:    VerifyNode(list.GetNode(1), 1, "one");
+        2:  177:    VerifyNode(list.GetNode(2), 2, "two");
+        2:  178:    VerifyNode(list.GetNode(3), 3, "three");
+       2*:  179:    EXPECT_EQ(list.GetNode(4), nullptr);
+        2:  180:    VerifyList();
+        2:  181:}
+------------------
+_ZN10LinkedList40DoublelyLinkedListTest_GetNodeByKey_TestC2Ev:
+        2:  163:TEST_F(DoublelyLinkedListTest, GetNodeByKey) {
+------------------
+_ZN10LinkedList40DoublelyLinkedListTest_GetNodeByKey_TestD0Ev:
+        2:  163:TEST_F(DoublelyLinkedListTest, GetNodeByKey) {
+------------------
+_ZN10LinkedList40DoublelyLinkedListTest_GetNodeByKey_TestD2Ev:
+        2:  163:TEST_F(DoublelyLinkedListTest, GetNodeByKey) {
+------------------
+_ZN10LinkedList40DoublelyLinkedListTest_GetNodeByKey_Test8TestBodyEv:
+        2:  163:TEST_F(DoublelyLinkedListTest, GetNodeByKey) {
+        -:  164:    // Empty list
+       2*:  165:    EXPECT_EQ(list.GetNode(1), nullptr);
+        -:  166:
+        -:  167:    // Single node
+        2:  168:    list.AddNode(1, "one");
+        2:  169:    DoubleLL* node = list.GetNode(1);
+        2:  170:    VerifyNode(node, 1, "one");
+       2*:  171:    EXPECT_EQ(list.GetNode(2), nullptr);
+        -:  172:
+        -:  173:    // Multiple nodes
+        2:  174:    list.AddNode(2, "two");
+        2:  175:    list.AddNode(3, "three");
+        2:  176:    VerifyNode(list.GetNode(1), 1, "one");
+        2:  177:    VerifyNode(list.GetNode(2), 2, "two");
+        2:  178:    VerifyNode(list.GetNode(3), 3, "three");
+       2*:  179:    EXPECT_EQ(list.GetNode(4), nullptr);
+        2:  180:    VerifyList();
+        2:  181:}
+------------------
+        -:  182:
+        -:  183:// Test MoveNodeFront
+        8:  184:TEST_F(DoublelyLinkedListTest, MoveNodeFront) {
+        2:  185:    list.AddNode(1, "one");
+        2:  186:    list.AddNode(2, "two");
+        2:  187:    list.AddNode(3, "three");
+        -:  188:
+        -:  189:    // Move head (no-op)
+        2:  190:    DoubleLL* node = list.GetNode(1);
+       2*:  191:    EXPECT_TRUE(list.MoveNodeFront(node));
+        8:  192:    VerifyListContent({{1, "one"}, {2, "two"}, {3, "three"}});
+        2:  193:    VerifyList();
+        -:  194:
+        -:  195:    // Move tail
+        2:  196:    node = list.GetNode(3);
+       2*:  197:    EXPECT_TRUE(list.MoveNodeFront(node));
+        8:  198:    VerifyListContent({{3, "three"}, {1, "one"}, {2, "two"}});
+        2:  199:    VerifyList();
+        -:  200:
+        -:  201:    // Move middle
+        2:  202:    node = list.GetNode(1);
+       2*:  203:    EXPECT_TRUE(list.MoveNodeFront(node));
+        8:  204:    VerifyListContent({{1, "one"}, {3, "three"}, {2, "two"}});
+        2:  205:    VerifyList();
+        8:  206:}
+------------------
+_ZN10LinkedList41DoublelyLinkedListTest_MoveNodeFront_TestC2Ev:
+        2:  184:TEST_F(DoublelyLinkedListTest, MoveNodeFront) {
+------------------
+_ZN10LinkedList41DoublelyLinkedListTest_MoveNodeFront_TestD0Ev:
+        2:  184:TEST_F(DoublelyLinkedListTest, MoveNodeFront) {
+------------------
+_ZN10LinkedList41DoublelyLinkedListTest_MoveNodeFront_TestD2Ev:
+        2:  184:TEST_F(DoublelyLinkedListTest, MoveNodeFront) {
+------------------
+_ZN10LinkedList41DoublelyLinkedListTest_MoveNodeFront_Test8TestBodyEv:
+        2:  184:TEST_F(DoublelyLinkedListTest, MoveNodeFront) {
+        2:  185:    list.AddNode(1, "one");
+        2:  186:    list.AddNode(2, "two");
+        2:  187:    list.AddNode(3, "three");
+        -:  188:
+        -:  189:    // Move head (no-op)
+        2:  190:    DoubleLL* node = list.GetNode(1);
+       2*:  191:    EXPECT_TRUE(list.MoveNodeFront(node));
+        8:  192:    VerifyListContent({{1, "one"}, {2, "two"}, {3, "three"}});
+        2:  193:    VerifyList();
+        -:  194:
+        -:  195:    // Move tail
+        2:  196:    node = list.GetNode(3);
+       2*:  197:    EXPECT_TRUE(list.MoveNodeFront(node));
+        8:  198:    VerifyListContent({{3, "three"}, {1, "one"}, {2, "two"}});
+        2:  199:    VerifyList();
+        -:  200:
+        -:  201:    // Move middle
+        2:  202:    node = list.GetNode(1);
+       2*:  203:    EXPECT_TRUE(list.MoveNodeFront(node));
+        8:  204:    VerifyListContent({{1, "one"}, {3, "three"}, {2, "two"}});
+        2:  205:    VerifyList();
+        8:  206:}
+------------------
+        -:  207:
+        -:  208:// Test RemoveNode by pointer
+        8:  209:TEST_F(DoublelyLinkedListTest, RemoveNodeByPointer) {
+        2:  210:    list.AddNode(1, "one");
+        2:  211:    list.AddNode(2, "two");
+        2:  212:    list.AddNode(3, "three");
+        -:  213:
+        -:  214:    // Remove head
+        2:  215:    DoubleLL* node = list.GetNode(1);
+       2*:  216:    EXPECT_TRUE(list.RemoveNode(node));
+       2*:  217:    EXPECT_EQ(list.GetSize(), 2);
+        6:  218:    VerifyListContent({{2, "two"}, {3, "three"}});
+        2:  219:    VerifyList();
+        -:  220:
+        -:  221:    // Remove tail
+        2:  222:    node = list.GetNode(3);
+       2*:  223:    EXPECT_TRUE(list.RemoveNode(node));
+       2*:  224:    EXPECT_EQ(list.GetSize(), 1);
+        4:  225:    VerifyListContent({{2, "two"}});
+        2:  226:    VerifyList();
+        -:  227:
+        -:  228:    // Remove last node
+        2:  229:    node = list.GetNode(2);
+       2*:  230:    EXPECT_TRUE(list.RemoveNode(node));
+       2*:  231:    EXPECT_EQ(list.GetSize(), 0);
+       2*:  232:    EXPECT_EQ(list.GetHead(), nullptr);
+       2*:  233:    EXPECT_EQ(list.GetTail(), nullptr);
+        2:  234:    VerifyList();
+        6:  235:}
+------------------
+_ZN10LinkedList47DoublelyLinkedListTest_RemoveNodeByPointer_TestC2Ev:
+        2:  209:TEST_F(DoublelyLinkedListTest, RemoveNodeByPointer) {
+------------------
+_ZN10LinkedList47DoublelyLinkedListTest_RemoveNodeByPointer_TestD0Ev:
+        2:  209:TEST_F(DoublelyLinkedListTest, RemoveNodeByPointer) {
+------------------
+_ZN10LinkedList47DoublelyLinkedListTest_RemoveNodeByPointer_TestD2Ev:
+        2:  209:TEST_F(DoublelyLinkedListTest, RemoveNodeByPointer) {
+------------------
+_ZN10LinkedList47DoublelyLinkedListTest_RemoveNodeByPointer_Test8TestBodyEv:
+        2:  209:TEST_F(DoublelyLinkedListTest, RemoveNodeByPointer) {
+        2:  210:    list.AddNode(1, "one");
+        2:  211:    list.AddNode(2, "two");
+        2:  212:    list.AddNode(3, "three");
+        -:  213:
+        -:  214:    // Remove head
+        2:  215:    DoubleLL* node = list.GetNode(1);
+       2*:  216:    EXPECT_TRUE(list.RemoveNode(node));
+       2*:  217:    EXPECT_EQ(list.GetSize(), 2);
+        6:  218:    VerifyListContent({{2, "two"}, {3, "three"}});
+        2:  219:    VerifyList();
+        -:  220:
+        -:  221:    // Remove tail
+        2:  222:    node = list.GetNode(3);
+       2*:  223:    EXPECT_TRUE(list.RemoveNode(node));
+       2*:  224:    EXPECT_EQ(list.GetSize(), 1);
+        4:  225:    VerifyListContent({{2, "two"}});
+        2:  226:    VerifyList();
+        -:  227:
+        -:  228:    // Remove last node
+        2:  229:    node = list.GetNode(2);
+       2*:  230:    EXPECT_TRUE(list.RemoveNode(node));
+       2*:  231:    EXPECT_EQ(list.GetSize(), 0);
+       2*:  232:    EXPECT_EQ(list.GetHead(), nullptr);
+       2*:  233:    EXPECT_EQ(list.GetTail(), nullptr);
+        2:  234:    VerifyList();
+        6:  235:}
+------------------
+        -:  236:
+        -:  237:// Test RemoveNode by key
+        8:  238:TEST_F(DoublelyLinkedListTest, RemoveNodeByKey) {
+        2:  239:    list.AddNode(1, "one");
+        2:  240:    list.AddNode(2, "two");
+        2:  241:    list.AddNode(3, "three");
+        -:  242:
+        -:  243:    // Remove non-existent key
+       2*:  244:    EXPECT_FALSE(list.RemoveNode(4));
+       2*:  245:    EXPECT_EQ(list.GetSize(), 3);
+        -:  246:
+        -:  247:    // Remove middle
+       2*:  248:    EXPECT_TRUE(list.RemoveNode(2));
+       2*:  249:    EXPECT_EQ(list.GetSize(), 2);
+        6:  250:    VerifyListContent({{1, "one"}, {3, "three"}});
+        2:  251:    VerifyList();
+        -:  252:
+        -:  253:    // Remove head
+       2*:  254:    EXPECT_TRUE(list.RemoveNode(1));
+       2*:  255:    EXPECT_EQ(list.GetSize(), 1);
+        4:  256:    VerifyListContent({{3, "three"}});
+        2:  257:    VerifyList();
+        -:  258:
+        -:  259:    // Remove last
+       2*:  260:    EXPECT_TRUE(list.RemoveNode(3));
+       2*:  261:    EXPECT_EQ(list.GetSize(), 0);
+        2:  262:    VerifyList();
+        6:  263:}
+------------------
+_ZN10LinkedList43DoublelyLinkedListTest_RemoveNodeByKey_TestC2Ev:
+        2:  238:TEST_F(DoublelyLinkedListTest, RemoveNodeByKey) {
+------------------
+_ZN10LinkedList43DoublelyLinkedListTest_RemoveNodeByKey_TestD0Ev:
+        2:  238:TEST_F(DoublelyLinkedListTest, RemoveNodeByKey) {
+------------------
+_ZN10LinkedList43DoublelyLinkedListTest_RemoveNodeByKey_TestD2Ev:
+        2:  238:TEST_F(DoublelyLinkedListTest, RemoveNodeByKey) {
+------------------
+_ZN10LinkedList43DoublelyLinkedListTest_RemoveNodeByKey_Test8TestBodyEv:
+        2:  238:TEST_F(DoublelyLinkedListTest, RemoveNodeByKey) {
+        2:  239:    list.AddNode(1, "one");
+        2:  240:    list.AddNode(2, "two");
+        2:  241:    list.AddNode(3, "three");
+        -:  242:
+        -:  243:    // Remove non-existent key
+       2*:  244:    EXPECT_FALSE(list.RemoveNode(4));
+       2*:  245:    EXPECT_EQ(list.GetSize(), 3);
+        -:  246:
+        -:  247:    // Remove middle
+       2*:  248:    EXPECT_TRUE(list.RemoveNode(2));
+       2*:  249:    EXPECT_EQ(list.GetSize(), 2);
+        6:  250:    VerifyListContent({{1, "one"}, {3, "three"}});
+        2:  251:    VerifyList();
+        -:  252:
+        -:  253:    // Remove head
+       2*:  254:    EXPECT_TRUE(list.RemoveNode(1));
+       2*:  255:    EXPECT_EQ(list.GetSize(), 1);
+        4:  256:    VerifyListContent({{3, "three"}});
+        2:  257:    VerifyList();
+        -:  258:
+        -:  259:    // Remove last
+       2*:  260:    EXPECT_TRUE(list.RemoveNode(3));
+       2*:  261:    EXPECT_EQ(list.GetSize(), 0);
+        2:  262:    VerifyList();
+        6:  263:}
+------------------
+        -:  264:
+        -:  265:// Test SwapNodes
+        8:  266:TEST_F(DoublelyLinkedListTest, SwapNodes) {
+        2:  267:    list.AddNode(1, "one");
+        2:  268:    list.AddNode(2, "two");
+        2:  269:    list.AddNode(3, "three");
+        2:  270:    list.AddNode(4, "four");
+        -:  271:
+        -:  272:    // Swap same node
+        2:  273:    DoubleLL* node1 = list.GetNode(1);
+       2*:  274:    EXPECT_TRUE(list.SwapNodes(node1, node1));
+       10:  275:    VerifyListContent({{1, "one"}, {2, "two"}, {3, "three"}, {4, "four"}});
+        2:  276:    VerifyList();
+        -:  277:
+        -:  278:    // Swap adjacent (head and next)
+        2:  279:    DoubleLL* node2 = list.GetNode(2);
+       2*:  280:    EXPECT_TRUE(list.SwapNodes(node1, node2));
+       10:  281:    VerifyListContent({{2, "two"}, {1, "one"}, {3, "three"}, {4, "four"}});
+        2:  282:    VerifyList();
+        -:  283:
+        -:  284:    // Swap adjacent (reverse order)
+        2:  285:    node1 = list.GetNode(1);
+        2:  286:    node2 = list.GetNode(3);
+       2*:  287:    EXPECT_TRUE(list.SwapNodes(node1, node2));
+       10:  288:    VerifyListContent({{2, "two"}, {3, "three"}, {1, "one"}, {4, "four"}});
+        2:  289:    VerifyList();
+        -:  290:
+        -:  291:    // Swap non-adjacent
+        2:  292:    node1 = list.GetNode(2);
+        2:  293:    node2 = list.GetNode(4);
+       2*:  294:    EXPECT_TRUE(list.SwapNodes(node1, node2));
+       10:  295:    VerifyListContent({{4, "four"}, {3, "three"}, {1, "one"}, {2, "two"}});
+        2:  296:    VerifyList();
+        -:  297:
+        -:  298:    // Swap head and tail
+        2:  299:    node1 = list.GetNode(4);
+        2:  300:    node2 = list.GetNode(2);
+       2*:  301:    EXPECT_TRUE(list.SwapNodes(node1, node2));
+       10:  302:    VerifyListContent({{2, "two"}, {3, "three"}, {1, "one"}, {4, "four"}});
+        2:  303:    VerifyList();
+       12:  304:}
+------------------
+_ZN10LinkedList37DoublelyLinkedListTest_SwapNodes_TestC2Ev:
+        2:  266:TEST_F(DoublelyLinkedListTest, SwapNodes) {
+------------------
+_ZN10LinkedList37DoublelyLinkedListTest_SwapNodes_TestD0Ev:
+        2:  266:TEST_F(DoublelyLinkedListTest, SwapNodes) {
+------------------
+_ZN10LinkedList37DoublelyLinkedListTest_SwapNodes_TestD2Ev:
+        2:  266:TEST_F(DoublelyLinkedListTest, SwapNodes) {
+------------------
+_ZN10LinkedList37DoublelyLinkedListTest_SwapNodes_Test8TestBodyEv:
+        2:  266:TEST_F(DoublelyLinkedListTest, SwapNodes) {
+        2:  267:    list.AddNode(1, "one");
+        2:  268:    list.AddNode(2, "two");
+        2:  269:    list.AddNode(3, "three");
+        2:  270:    list.AddNode(4, "four");
+        -:  271:
+        -:  272:    // Swap same node
+        2:  273:    DoubleLL* node1 = list.GetNode(1);
+       2*:  274:    EXPECT_TRUE(list.SwapNodes(node1, node1));
+       10:  275:    VerifyListContent({{1, "one"}, {2, "two"}, {3, "three"}, {4, "four"}});
+        2:  276:    VerifyList();
+        -:  277:
+        -:  278:    // Swap adjacent (head and next)
+        2:  279:    DoubleLL* node2 = list.GetNode(2);
+       2*:  280:    EXPECT_TRUE(list.SwapNodes(node1, node2));
+       10:  281:    VerifyListContent({{2, "two"}, {1, "one"}, {3, "three"}, {4, "four"}});
+        2:  282:    VerifyList();
+        -:  283:
+        -:  284:    // Swap adjacent (reverse order)
+        2:  285:    node1 = list.GetNode(1);
+        2:  286:    node2 = list.GetNode(3);
+       2*:  287:    EXPECT_TRUE(list.SwapNodes(node1, node2));
+       10:  288:    VerifyListContent({{2, "two"}, {3, "three"}, {1, "one"}, {4, "four"}});
+        2:  289:    VerifyList();
+        -:  290:
+        -:  291:    // Swap non-adjacent
+        2:  292:    node1 = list.GetNode(2);
+        2:  293:    node2 = list.GetNode(4);
+       2*:  294:    EXPECT_TRUE(list.SwapNodes(node1, node2));
+       10:  295:    VerifyListContent({{4, "four"}, {3, "three"}, {1, "one"}, {2, "two"}});
+        2:  296:    VerifyList();
+        -:  297:
+        -:  298:    // Swap head and tail
+        2:  299:    node1 = list.GetNode(4);
+        2:  300:    node2 = list.GetNode(2);
+       2*:  301:    EXPECT_TRUE(list.SwapNodes(node1, node2));
+       10:  302:    VerifyListContent({{2, "two"}, {3, "three"}, {1, "one"}, {4, "four"}});
+        2:  303:    VerifyList();
+       12:  304:}
+------------------
+        -:  305:
+        -:  306:// Test destructor
+        8:  307:TEST_F(DoublelyLinkedListTest, Destructor) {
+        2:  308:    DoublelyLinkedList* tempList = new DoublelyLinkedList();
+        2:  309:    tempList->AddNode(1, "one");
+        2:  310:    tempList->AddNode(2, "two");
+        2:  311:    delete tempList; // Should not crash, memory freed
+        2:  312:}
+------------------
+_ZN10LinkedList38DoublelyLinkedListTest_Destructor_TestC2Ev:
+        2:  307:TEST_F(DoublelyLinkedListTest, Destructor) {
+------------------
+_ZN10LinkedList38DoublelyLinkedListTest_Destructor_TestD0Ev:
+        2:  307:TEST_F(DoublelyLinkedListTest, Destructor) {
+------------------
+_ZN10LinkedList38DoublelyLinkedListTest_Destructor_TestD2Ev:
+        2:  307:TEST_F(DoublelyLinkedListTest, Destructor) {
+------------------
+_ZN10LinkedList38DoublelyLinkedListTest_Destructor_Test8TestBodyEv:
+        2:  307:TEST_F(DoublelyLinkedListTest, Destructor) {
+        2:  308:    DoublelyLinkedList* tempList = new DoublelyLinkedList();
+        2:  309:    tempList->AddNode(1, "one");
+        2:  310:    tempList->AddNode(2, "two");
+        2:  311:    delete tempList; // Should not crash, memory freed
+        2:  312:}
+------------------
+        -:  313:
+        -:  314:} // namespace LinkedList
+        -:  315:
+        2:  316:int main(int argc, char **argv) {
+        2:  317:    ::testing::InitGoogleTest(&argc, argv);
+        2:  318:    return RUN_ALL_TESTS();
+        -:  319:}

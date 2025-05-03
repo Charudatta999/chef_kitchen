@@ -1,0 +1,309 @@
+        -:    0:Source:src/DoublelyLinkedList.cpp
+        -:    1:#include "../inc/DoublelyLinkedList.hpp"
+        -:    2:#include <iostream>
+        -:    3:
+        -:    4:namespace LinkedList
+        -:    5:{
+       24:    6:    DoublelyLinkedList::DoublelyLinkedList() : head_(nullptr), tail_(nullptr),size_{0} {}
+        -:    7:
+       46:    8:    bool DoublelyLinkedList::AddNode(int key, std::string val)
+        -:    9:    {
+       46:   10:        DoubleLL* node = new DoubleLL(key, val, nullptr, nullptr);
+       46:   11:        if(head_ == nullptr)
+        -:   12:        {
+       16:   13:            head_ = node;
+       16:   14:            tail_ = node;
+       16:   15:            ++size_;
+       16:   16:            return true;
+        -:   17:        }
+        -:   18:        else
+        -:   19:        {
+       30:   20:            tail_->next_ = node;
+       30:   21:            node->prev_ = tail_;
+       30:   22:            tail_ = node;
+       30:   23:            ++size_;
+       30:   24:            return true;
+        -:   25:        }
+        -:   26:        return false;
+        -:   27:    }
+        -:   28:
+        6:   29:    bool DoublelyLinkedList::AddNodeFront(int key, std::string val)
+        -:   30:    {
+        6:   31:        DoubleLL* node = new DoubleLL(key, val, nullptr, nullptr);
+        6:   32:        if(head_ != nullptr)
+        -:   33:        {
+        2:   34:            node->next_ = head_;
+        2:   35:            head_->prev_ = node;
+        -:   36:        }
+        6:   37:        head_ = node;
+        6:   38:        if(tail_ == nullptr)
+        -:   39:        {
+        4:   40:            tail_ = node;
+        -:   41:        }
+        6:   42:        ++size_;
+        6:   43:        return true;
+        -:   44:    }
+        -:   45:
+       12:   46:    bool DoublelyLinkedList::AddNode(int key, std::string val, int position)
+        -:   47:    {
+       12:   48:        if(position < 0 || position > size_)
+        -:   49:        {
+        4:   50:            std::cerr << "List out of bounds..." << std::endl;
+        4:   51:            return false;
+        -:   52:        }
+        -:   53:
+        8:   54:        if(position == 0)
+        -:   55:        {
+        2:   56:           return AddNodeFront(key,val);
+        -:   57:        }
+        -:   58:
+        6:   59:        DoubleLL* node = new DoubleLL(key, val, nullptr, nullptr);
+        -:   60:
+        -:   61:        
+        6:   62:        if(position > 0)
+        -:   63:        {
+        -:   64:            
+        6:   65:            int it = 0;
+        6:   66:            auto temp = head_;
+       10:   67:            while (it < position - 1)
+        -:   68:            {
+        4:   69:                temp = temp->next_;
+        4:   70:                ++it;
+        -:   71:            }
+        6:   72:            node->prev_ = temp;
+        6:   73:            node->next_ = temp->next_;
+        6:   74:            if(temp->next_) //takes care of tail
+        -:   75:            {
+        2:   76:                temp->next_->prev_ = node;
+        -:   77:            }
+        6:   78:            temp->next_ = node;
+        6:   79:            if(node->next_ == nullptr)//takes cares to update tail_
+        -:   80:            {
+        4:   81:                tail_ = node;
+        -:   82:            }
+        6:   83:            ++size_;
+        6:   84:            return true;
+        -:   85:        }
+    #####:   86:        return false;
+        -:   87:    }
+        -:   88:
+        6:   89:    bool DoublelyLinkedList::MoveNodeFront(DoubleLL* node)
+        -:   90:    {
+        6:   91:        if (node == head_) return true;
+        -:   92:
+        4:   93:        if (node == tail_) 
+        -:   94:        {
+        2:   95:            tail_ = node->prev_;
+        2:   96:            tail_->next_ = nullptr;
+        -:   97:        }
+        4:   98:        if (node->prev_) node->prev_->next_ = node->next_;
+        4:   99:        if (node->next_) node->next_->prev_ = node->prev_;
+        -:  100:
+        4:  101:        node->prev_ = nullptr;
+        4:  102:        node->next_ = head_;
+        -:  103:
+        4:  104:        if (head_) head_->prev_ = node;
+        4:  105:        head_ = node;
+        -:  106:
+        4:  107:        return true;
+        -:  108:    }
+        -:  109:
+        -:  110:
+       12:  111:    bool DoublelyLinkedList::RemoveNode(DoubleLL* node)
+        -:  112:    {
+      12*:  113:        if (node == nullptr) return false;
+        -:  114:    
+       12:  115:        if (node == head_ && node == tail_) {
+        4:  116:            head_ = tail_ = nullptr;
+        8:  117:        } else if (node == head_) {
+        4:  118:            head_ = head_->next_;
+        4:  119:            head_->prev_ = nullptr;
+        4:  120:        } else if (node == tail_) {
+        2:  121:            tail_ = tail_->prev_;
+        2:  122:            tail_->next_ = nullptr;
+        -:  123:        } else {
+        2:  124:            if (node->prev_) node->prev_->next_ = node->next_;
+        2:  125:            if (node->next_) node->next_->prev_ = node->prev_;
+        -:  126:        }
+        -:  127:    
+       12:  128:        delete node;
+       12:  129:        --size_;
+       12:  130:        return true;
+        -:  131:    }
+        -:  132:    
+        -:  133:
+       14:  134:    DoubleLL* DoublelyLinkedList::GetNode(const std::string& val)
+        -:  135:    {
+       14:  136:        if (!head_ || !tail_) return nullptr;
+       12:  137:        if (val == head_->val_) return head_;
+        8:  138:        if (val == tail_->val_) return tail_;
+        -:  139:
+        -:  140:        // Traverse from both ends
+        6:  141:        DoubleLL* start = head_;
+        6:  142:        DoubleLL* end = tail_;
+       10:  143:        while (start && end && start != end)
+        -:  144:        {
+       4*:  145:            if (start->val_ == val) return start;
+       4*:  146:            if (end->val_ == val) return end;
+        4:  147:            start = start->next_;
+        4:  148:            end = end->prev_;
+        -:  149:        }
+        6:  150:        if (start != nullptr && start == end && start->val_ == val) return start;
+        4:  151:        return nullptr;
+        -:  152:    }
+        -:  153:
+       50:  154:    DoubleLL* DoublelyLinkedList::GetNode(int key)
+        -:  155:    {
+       50:  156:        if (!head_ || !tail_) return nullptr;
+        -:  157:
+       48:  158:        if(key == head_->key_)
+        -:  159:        {
+       20:  160:            return head_;
+        -:  161:        }
+        -:  162:
+       28:  163:        if(key == tail_->key_)
+        -:  164:        {
+       10:  165:            return tail_;
+        -:  166:        }
+       18:  167:        DoubleLL* start = head_;
+       18:  168:        DoubleLL* end = tail_;
+        -:  169:
+       18:  170:        if (start == end) 
+        -:  171:        {
+       2*:  172:            if (start->key_ == key) return start;
+        2:  173:            return nullptr;
+        -:  174:        }
+        -:  175:
+       32:  176:        while(start != nullptr && end != nullptr && start != end)
+        -:  177:        {
+       22:  178:            if(start->key_ == key)
+        -:  179:            {
+        4:  180:                return start;
+        -:  181:            }
+       18:  182:            if(end->key_ == key)
+        -:  183:            {
+        2:  184:                return end;
+        -:  185:            }
+       16:  186:            end = end->prev_;
+       16:  187:            start = start->next_;
+        -:  188:        }
+       10:  189:        if (start != nullptr && start == end && start->key_ == key)
+        -:  190:        {
+        6:  191:            return start;
+        -:  192:        }
+        4:  193:        return nullptr;
+        -:  194:    }
+        -:  195:
+       10:  196:    bool DoublelyLinkedList::SwapNodes(DoubleLL* first, DoubleLL* second)
+        -:  197:    {
+       10:  198:        if(first == second) return true;
+        -:  199:    
+        8:  200:        if(first->next_ == second) {
+        -:  201:            // Adjacent case: first is before second
+        4:  202:            first->next_ = second->next_; // Unlink first's next from second
+        4:  203:            if(second->next_) {
+        4:  204:                second->next_->prev_ = first; // Link second's next node to first
+        -:  205:            }
+        4:  206:            second->prev_ = first->prev_;
+        4:  207:            if(first->prev_) {
+        2:  208:                first->prev_->next_ = second; // Link first's prev node to second
+        -:  209:            }
+        4:  210:            second->next_ = first; // Link second's next to first
+        4:  211:            first->prev_ = second; // Link first's prev to second
+        -:  212:    
+        -:  213:            // Adjust head and tail if necessary
+        4:  214:            if (head_ == first) head_ = second;
+       4*:  215:            if (tail_ == second) tail_ = first;
+        -:  216:    
+        4:  217:            return true;
+        -:  218:        }
+        4:  219:        else if(second->next_ == first) {
+        -:  220:            // Adjacent case: second is before first
+    #####:  221:            second->next_ = first->next_; // Unlink second's next from first
+    #####:  222:            if(first->next_) {
+    #####:  223:                first->next_->prev_ = second; // Link first's next node to second
+        -:  224:            }
+    #####:  225:            first->next_ = second; // Link first's next to second
+    #####:  226:            first->prev_ = second->prev_; // Link first's prev to second's prev
+    #####:  227:            second->prev_ = first; // Link second's prev to first
+        -:  228:    
+        -:  229:            // Adjust head and tail if necessary
+    #####:  230:            if (head_ == second) head_ = first;
+    #####:  231:            if (tail_ == first) tail_ = second;
+        -:  232:    
+    #####:  233:            return true;
+        -:  234:        } 
+        -:  235:        else {
+        -:  236:            // Non-adjacent case: first and second are not adjacent
+        4:  237:            if (head_ == first) head_ = second; // If first is at head, update head
+    #####:  238:            else if (head_ == second) head_ = first; // If second is at head, update head
+        -:  239:    
+       4*:  240:            if (tail_ == first) tail_ = second; // If first is at tail, update tail
+        4:  241:            else if (tail_ == second) tail_ = first; // If second is at tail, update tail
+        -:  242:    
+        -:  243:            // Save the neighbors of first and second
+        4:  244:            auto firstPrev = first->prev_;
+        4:  245:            auto firstNext = first->next_;
+        4:  246:            auto secondPrev = second->prev_;
+        4:  247:            auto secondNext = second->next_;
+        -:  248:    
+        -:  249:            // Swap the next and prev pointers
+        4:  250:            first->next_ = secondNext;
+        4:  251:            first->prev_ = secondPrev;
+        4:  252:            second->next_ = firstNext;
+        4:  253:            second->prev_ = firstPrev;
+        -:  254:    
+        -:  255:            // Update the neighbors
+       4*:  256:            if (firstPrev) firstPrev->next_ = second;
+        4:  257:            if (firstNext) firstNext->prev_ = second;
+        4:  258:            if (secondPrev) secondPrev->next_ = first;
+       4*:  259:            if (secondNext) secondNext->prev_ = first;
+        -:  260:    
+        4:  261:            return true;
+        -:  262:        }
+        -:  263:        return false;
+        -:  264:    }
+        8:  265:    bool DoublelyLinkedList::RemoveNode(int key)
+        -:  266:    {
+        8:  267:        DoubleLL* temp = GetNode(key);
+        8:  268:        if (temp) 
+        -:  269:        {
+        6:  270:            RemoveNode(temp);        
+        6:  271:            return true;
+        -:  272:        }
+        2:  273:        return false;
+        -:  274:    }
+        -:  275:
+      242:  276:    DoubleLL* DoublelyLinkedList::GetHead()
+        -:  277:    {
+      242:  278:        if(head_)
+        -:  279:        {
+      220:  280:            return head_;
+        -:  281:        }
+       22:  282:        return nullptr;
+        -:  283:    }
+        -:  284:
+      158:  285:    DoubleLL* DoublelyLinkedList::GetTail()
+        -:  286:    {
+      158:  287:        if(tail_)
+        -:  288:        {
+      142:  289:            return tail_;
+        -:  290:        }
+       16:  291:        return nullptr;
+        -:  292:    }
+        -:  293:
+      134:  294:    int DoublelyLinkedList::GetSize()
+        -:  295:    {
+      134:  296:        return size_;
+        -:  297:    }
+       24:  298:    DoublelyLinkedList::~DoublelyLinkedList() 
+        -:  299:    {
+       24:  300:        DoubleLL* current = head_;
+       70:  301:        while (current != nullptr) {
+       46:  302:            DoubleLL* next = current->next_;
+       46:  303:            delete current;
+       46:  304:            current = next;
+        -:  305:        }
+       24:  306:    }
+        -:  307:    
+        -:  308:}
