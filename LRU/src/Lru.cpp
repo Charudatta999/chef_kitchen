@@ -15,7 +15,7 @@ namespace LRU
     
     bool Lru::HasCapacity()
     {
-        if(capacity_ >= usageOrder_->GetSize())
+        if(capacity_ > usageOrder_->GetSize())
         {
             return true;
         }
@@ -65,7 +65,7 @@ namespace LRU
         }
 
         index_[key] = usageOrder_->AddNodeFront(key, value);
-        if(index_[key])
+        if(!index_[key])
         {
             std::cerr << "Node creation failed" << std::endl;
             return false;
@@ -116,4 +116,8 @@ namespace LRU
         return capacity_;
     }
 
+    Lru::~Lru() {
+        ClearCache();
+        usageOrder_.reset();
+    }
 }
