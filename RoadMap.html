@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threaded Bites: Cosmic Cooking Clash</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0a0a1a 0%, #2a0044 100%);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            touch-action: manipulation;
+            position: relative;
+            min-height: 100vh;
+            z-index: 0;
+        }
+
+        /* Cosmic Background with Twinkling Stars */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="1" fill="white" opacity="0.5"/></svg>') repeat;
+            animation: twinkleStars 10s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes twinkleStars {
+            0% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.5; }
+        }
+
+        header {
+            position: relative;
+            background: linear-gradient(to bottom, #1a0033, #00ffcc);
+            padding: 60px 20px 40px;
+            text-align: center;
+            font-size: 28px;
+            text-shadow: 0 0 10px #ff1493;
+            border-bottom: 4px solid #ff6347;
+            box-shadow: 0 4px 20px rgba(0, 255, 204, 0.6);
+            z-index: 1;
+        }
+
+        /* Redesigned UFO */
+        .ufo {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 40px;
+            background: linear-gradient(45deg, #c0c0c0, #66ccff);
+            border-radius: 50% / 30%;
+            box-shadow: 0 0 20px #66ccff, 0 0 40px #00ffcc;
+            animation: ufoRotate 8s linear infinite, ufoHover 2s ease-in-out infinite;
+        }
+
+        .ufo::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 20px;
+            background: radial-gradient(circle, #ff1493, #ff6347);
+            border-radius: 50%;
+            box-shadow: 0 0 15px #ff1493;
+        }
+
+        @keyframes ufoRotate {
+            0% { transform: translateX(-50%) rotate(0deg); }
+            100% { transform: translateX(-50%) rotate(360deg); }
+        }
+
+        @keyframes ufoHover {
+            0%, 100% { top: 20px; }
+            50% { top: 10px; }
+        }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        section {
+            background: rgba(30, 30, 50, 0.9);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 255, 204, 0.4);
+            border: 1px solid #00ffcc;
+            animation: fadeInSection 1s ease-out;
+        }
+
+        @keyframes fadeInSection {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #00ffcc;
+            text-shadow: 0 0 5px #00ffcc;
+            animation: neonGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 15px 0;
+            padding: 15px;
+            border-bottom: 1px dashed #ff1493;
+            transition: background 0.3s;
+        }
+
+        li:hover {
+            background: rgba(255, 20, 147, 0.15);
+        }
+
+        input[type="checkbox"] {
+            margin-right: 15px;
+            accent-color: #ff1493;
+            transform: scale(1.5);
+        }
+
+        label {
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+            text-shadow: 0 0 3px #ff6347;
+        }
+
+        p {
+            margin: 8px 0;
+            color: #e0e0e0;
+        }
+
+        .achievement {
+            color: #00ffcc;
+            font-style: italic;
+            text-shadow: 0 0 5px #00ffcc;
+        }
+
+        #progress-bar {
+            width: 100%;
+            height: 25px;
+            border-radius: 12px;
+            background: #222;
+            border: 2px solid #ff1493;
+        }
+
+        progress::-webkit-progress-value {
+            background: linear-gradient(to right, #ff6347, #00ffcc);
+        }
+
+        /* Skyshot Fireworks */
+        #fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+        }
+
+        .skyshot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: radial-gradient(circle, white, transparent);
+            box-shadow: 0 0 20px currentColor;
+            animation: skyshot 2s ease-out forwards;
+        }
+
+        @keyframes skyshot {
+            0% {
+                bottom: 0;
+                opacity: 1;
+                transform: scale(0.5) translateY(0);
+            }
+            50% {
+                opacity: 0.9;
+                transform: scale(2) translateY(-60vh);
+            }
+            100% {
+                bottom: 90%;
+                opacity: 0;
+                transform: scale(4) translateY(-90vh);
+            }
+        }
+
+        @keyframes neonGlow {
+            from { text-shadow: 0 0 5px #fff, 0 0 10px #ff1493, 0 0 15px #00ffcc; }
+            to { text-shadow: 0 0 10px #fff, 0 0 20px #ff6347, 0 0 30px #00ffcc; }
+        }
+
+        /* PlantUML Diagrams */
+        .uml-diagram {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+        }
+
+        /* Level Styling */
+        .level {
+            display: none;
+        }
+
+        .level.active {
+            display: block;
+        }
+
+        .locked {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="ufo"></div>
+        <h1 class="neon-text">Threaded Bites: Cosmic Cooking Clash</h1>
+    </header>
+    <main>
+        <section id="introduction">
+            <h2>Welcome, Galactic Gourmand!</h2>
+            <p>In a universe where diners orbit pulsars and recipes are coded in starlight, *Threaded Bites* beckons you to a culinary odyssey. Channeling the jazzy swagger of *Cowboy Bebop* and the quirky wisdom of *The Hitchhiker's Guide to the Galaxy*, this tablet-ready cooking game is your towel-wrapped guide to threading mastery. Build a space kitchen where neon carrots float and orders zip like Vogon poetry—minimalistic, retro-futuristic, and utterly cosmic. Complete levels to unlock new challenges and watch the skies erupt in dazzling skyshots!</p>
+        </section>
+
+        <section id="real-world-example">
+            <h2>The Pan-Galactic Diner</h2>
+            <p>Envision a chrome-plated eatery drifting through a nebula, its counters pulsing with neon:</p>
+            <ul>
+                <li><strong>Host</strong>: A smooth-talking android logging orders like “Quantum Quiche” into a holographic queue.</li>
+                <li><strong>Chef</strong>: A cyber-cowboy flipping synth-steaks, pulling ingredients from a glowing vault.</li>
+                <li><strong>Inventory Manager</strong>: A drone-whisperer restocking bioluminescent herbs.</li>
+                <li><strong>Stations</strong>: Order Queue (a flickering hologram), Kitchen (a fusion reactor), Inventory (a crystalline pod).</li>
+            </ul>
+            <p>Don’t panic—this diner thrives on synchronized chaos, with threads weaving a tapestry of culinary brilliance.</p>
+        </section>
+
+        <section id="tasks-achievements">
+            <h2>Culinary Quests</h2>
+            <p>Embark on these missions to conquer the cosmic kitchen. Each level unlocks after completing the main task of the previous one. Check off tasks to ignite skyshot fireworks and claim neon-soaked glory!</p>
+            <div class="level active" id="level1">
+                <h3>Level 1: Craft Your Cosmic Menu</h3>
+                <ul>
+                    <li>
+                        <input type="checkbox" id="task1" onchange="handleTaskChange(this, 'level2')">
+                        <label for="task1">Task: Forge Data Models</label>
+                        <p><strong>Description</strong>: Design data models for interstellar feasts—Orders, Recipes, and Ingredients. Think of it as writing the menu for a Zaphod Beeblebrox banquet.</p>
+                        <p class="achievement">Achievement: 🌌 Menu Maestro</p>
+                        <ul>
+                            <li>
+                                <input type="checkbox" id="task1_1" onchange="handleTaskChange(this)">
+                                <label for="task1_1">Subtask: Sculpt the Order Blueprint</label>
+                                <p><strong>Description</strong>: Create a struct for orders with ID, dish name, and quantity—like a ticket for “42 Cosmic Burgers.”</p>
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" id="task1_1_1" onchange="handleTaskChange(this)">
+                                        <label for="task1_1_1">Microtask: Define Order ID</label>
+                                        <p><strong>Description</strong>: Assign a unique numeric identifier to track orders across the galaxy.</p>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="task1_1_2" onchange="handleTaskChange(this)">
+                                        <label for="task1_1_2">Microtask: Name the Dish</label>
+                                        <p><strong>Description</strong>: Add a string field for dish names, like “Nebula Noodles.”</p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="task1_2" onchange="handleTaskChange(this)">
+                                <label for="task1_2">Subtask: Concoct Recipe Magic</label>
+                                <p><strong>Description</strong>: Brew a class listing ingredients for each dish, like a recipe for Pan-Galactic Gargle Blasters.</p>
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" id="task1_2_1" onchange="handleTaskChange(this)">
+                                        <label for="task1_2_1">Microtask: List Ingredients</label>
+                                        <p><strong>Description</strong>: Create an array of ingredient requirements (e.g., “2 glowberries, 1 starspice”).</p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="task1_3" onchange="handleTaskChange(this)">
+                                <label for="task1_3">Subtask: Shape Ingredients</label>
+                                <p><strong>Description</strong>: Mold a struct for ingredients with name and stock, like a crate of “Quantum Carrots.”</p>
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" id="task1_3_1" onchange="handleTaskChange(this)">
+                                        <label for="task1_3_1">Microtask: Name Ingredient</label>
+                                        <p><strong>Description</strong>: Set a string for ingredient identity, e.g., “Meteor Mint.”</p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="task1_4" onchange="handleTaskChange(this)">
+                                <label for="task1_4">Subtask: Launch RecipeManager</label>
+                                <p><strong>Description</strong>: Build a class linking orders to recipes, like a galactic cookbook.</p>
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" id="task1_4_1" onchange="handleTaskChange(this)">
+                                        <label for="task1_4_1">Microtask: Map Orders</label>
+                                        <p><strong>Description</strong>: Create a dictionary for order-to-recipe lookup, ensuring instant access.</p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="level locked" id="level2">
+                <h3>Level 2: Sync the Order Nebula</h3>
+                <ul>
+                    <li>
+                        <input type="checkbox" id="task2" onchange="handleTaskChange(this, 'level3')">
+                        <label for="task2">Task: Build Thread-Safe Queue</label>
+                        <p><strong>Description</strong>: Forge a thread-safe OrderQueue with mutexes and signals, like a hyperspace relay for orders.</p>
+                        <p class="achievement">Achievement: 🔮 Nebula Navigator</p>
+                        <ul>
+                            <li>
+                                <input type="checkbox" id="task2_1" onchange="handleTaskChange(this)">
+                                <label for="task2_1">Subtask: Erect Queue Core</label>
+                                <p><strong>Description</strong>: Build a class to hold the order list, like a queue of ships at a spaceport.</p>
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" id="task2_1_1" onchange="handleTaskChange(this)">
+                                        <label for="task2_1_1">Microtask: Initialize List</label>
+                                        <p><strong>Description</strong>: Set up an empty order array to store incoming tickets.</p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="task2_2" onchange="handleTaskChange(this)">
+                                <label for="task2_2">Subtask: Lock with Mutex</label>
+                                <p><strong>Description</strong>: Secure queue access with a mutex, like locking a vault.</p>
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" id="task2_2_1" onchange="handleTaskChange(this)">
+                                        <label for="task2_2_1">Microtask: Add Mutex</label>
+                                        <p><strong>Description</strong>: Integrate a mutex object to prevent order mix-ups.</p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="task2_3" onchange="handleTaskChange(this)">
+                                <label for="task2_3">Subtask: Signal New Orders</label>
+                                <p><strong>Description</strong>: Use condition variables for order alerts, like a klaxon for new tickets.</p>
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" id="task2_3_1" onchange="handleTaskChange(this)">
+                                        <label for="task2_3_1">Microtask: Add Signal</label>
+                                        <p><strong>Description</strong>: Implement a condition variable to wake waiting chefs.</p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="level locked" id="level3">
+                <h3>Level 3: Stock the Galactic Vault</h3>
+                <ul>
+                    <li>
+                        <input type="checkbox" id="task3" onchange="handleTaskChange(this)">
+                        <label for="task3">Task: Create Inventory with LRU Cache</label>
+                        <p><strong>Description</strong>: Create an Inventory with an LRU cache, like a starship’s cargo hold optimized for speed.</p>
+                        <p class="achievement">Achievement: 🛸 Vault Visionary</p>
+                        <ul>
+                            <li>
+                                <input type="checkbox" id="task3_1" onchange="handleTaskChange(this)">
+                                <label for="task3_1">Subtask: Build Inventory Base</label>
+                                <p><strong>Description</strong>: Design a class for ingredient storage, like a pod for cosmic crops.</p>
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" id="task3_1_1" onchange="handleTaskChange(this)">
+                                        <label for="task3_1_1">Microtask: Store Ingredients</label>
+                                        <p><strong>Description</strong>: Set up a dictionary for stock levels, e.g., “10 glowberries.”</p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="task3_2" onchange="handleTaskChange(this)">
+                                <label for="task3_2">Subtask: Weave LRU Cache</label>
+                                <p><strong>Description</strong>: Add a cache for quick ingredient access, prioritizing recently used items.</p>
+                                <ul>
+                                    <li>
+                                        <input type="checkbox" id="task3_2_1" onchange="handleTaskChange(this)">
+                                        <label for="task3_2_1">Microtask: Cache Setup</label>
+                                        <p><strong>Description</strong>: Integrate LRU logic to keep hot ingredients at the front.</p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="diagrams">
+            <h2>Cosmic Blueprints</h2>
+            <p>These UML diagrams, generated with PlantUML, map your diner’s tech in precise detail:</p>
+            <h3>Class Diagram</h3>
+            <img class="uml-diagram" src="https://www.plantuml.com/plantuml/svg/your_class_diagram_code_here" alt="Class Diagram">
+            <p><strong>Description</strong>: Order links to Recipe (what’s needed), Recipe links to Ingredient (quantities), forming the diner’s data core.</p>
+            <h3>Sequence Diagram</h3>
+            <img class="uml-diagram" src="https://www.plantuml.com/plantuml/svg/your_sequence_diagram_code_here" alt="Sequence Diagram">
+            <p><strong>Description</strong>: Host queues order -> Chef checks inventory -> Inventory restocks if needed -> Chef cooks.</p>
+        </section>
+
+        <section id="progress">
+            <h2>Your Cosmic Progress</h2>
+            <progress id="progress-bar" value="0" max="100"></progress>
+        </section>
+    </main>
+
+    <div id="fireworks"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.min.js"></script>
+    <script>
+        let db;
+
+        async function initDB() {
+            const config = { locateFile: () => 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.wasm' };
+            const SQL = await initSqlJs(config);
+            db = new SQL.Database();
+            db.run("CREATE TABLE IF NOT EXISTS tasks (id TEXT PRIMARY KEY, completed INTEGER)");
+            const tasks = [
+                'task1', 'task1_1', 'task1_1_1', 'task1_1_2', 'task1_2', 'task1_2_1', 'task1_3', 'task1_3_1', 'task1_4', 'task1_4_1',
+                'task2', 'task2_1', 'task2_1_1', 'task2_2', 'task2_2_1', 'task2_3', 'task2_3_1',
+                'task3', 'task3_1', 'task3_1_1', 'task3_2', 'task3_2_1'
+            ];
+            tasks.forEach(task => {
+                const exists = db.exec("SELECT id FROM tasks WHERE id = ?", [task]);
+                if (!exists.length) {
+                    db.run("INSERT INTO tasks (id, completed) VALUES (?, 0)", [task]);
+                }
+            });
+            loadTaskStates();
+        }
+
+        function loadTaskStates() {
+            const tasks = document.querySelectorAll('input[type="checkbox"]');
+            tasks.forEach(task => {
+                const result = db.exec("SELECT completed FROM tasks WHERE id = ?", [task.id]);
+                if (result.length && result[0].values[0][0] === 1) {
+                    task.checked = true;
+                }
+            });
+            updateProgress();
+            updateLevels();
+        }
+
+        function handleTaskChange(checkbox, nextLevelId) {
+            const isChecked = checkbox.checked ? 1 : 0;
+            db.run("UPDATE tasks SET completed = ? WHERE id = ?", [isChecked, checkbox.id]);
+            updateProgress();
+            if (isChecked) {
+                showSkyshots();
+                if (nextLevelId) {
+                    unlockLevel(nextLevelId);
+                }
+            }
+        }
+
+        function unlockLevel(levelId) {
+            const level = document.getElementById(levelId);
+            if (level) {
+                level.classList.remove('locked');
+                level.classList.add('active');
+            }
+        }
+
+        function updateLevels() {
+            const task1 = document.getElementById('task1').checked;
+            const task2 = document.getElementById('task2').checked;
+            if (task1) {
+                unlockLevel('level2');
+            }
+            if (task2) {
+                unlockLevel('level3');
+            }
+        }
+
+        function updateProgress() {
+            const tasks = document.querySelectorAll('input[type="checkbox"]');
+            const completed = Array.from(tasks).filter(task => task.checked).length;
+            const total = tasks.length;
+            const progress = (completed / total) * 100;
+            document.getElementById('progress-bar').value = progress;
+        }
+
+        function showSkyshots() {
+            const fireworksContainer = document.getElementById('fireworks');
+            fireworksContainer.innerHTML = '';
+            fireworksContainer.style.display = 'block';
+
+            for (let i = 0; i < 40; i++) {
+                const skyshot = document.createElement('div');
+                skyshot.className = 'skyshot';
+                skyshot.style.left = `${Math.random() * 100}%`;
+                skyshot.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                skyshot.style.animationDelay = `${Math.random() * 0.5}s`;
+                fireworksContainer.appendChild(skyshot);
+            }
+
+            setTimeout(() => {
+                fireworksContainer.style.display = 'none';
+            }, 2500);
+        }
+
+        document.addEventListener('DOMContentLoaded', initDB);
+    </script>
+</body>
+</html>
