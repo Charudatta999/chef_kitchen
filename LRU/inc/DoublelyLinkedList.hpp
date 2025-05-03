@@ -14,21 +14,21 @@ namespace LinkedList
 
             DoubleLL* head_;
             DoubleLL* tail_;
-            int size_;
+            size_t size_;
 
         public:
             DoublelyLinkedList();
             ~DoublelyLinkedList();
             bool AddNode(int key, std::string val); //done
             bool AddNode(int key, std::string val, int positon); //done
-            bool AddNodeFront(int key, std::string val); //done
+            DoubleLL* AddNodeFront(int key, std::string val); //done
             bool RemoveNode(int key); //done
             bool RemoveNode(DoubleLL* node); // done
             bool MoveNodeFront(DoubleLL* node); //done
             bool SwapNodes(DoubleLL* first, DoubleLL* second); //node
             DoubleLL* GetTail();
             DoubleLL* GetHead();
-            int GetSize();
+            size_t GetSize();
             DoubleLL* GetNode(int key); // done
             DoubleLL* GetNode(const std::string& val); //done
             

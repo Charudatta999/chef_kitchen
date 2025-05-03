@@ -26,7 +26,7 @@ namespace LinkedList
         return false;
     }
 
-    bool DoublelyLinkedList::AddNodeFront(int key, std::string val)
+    DoubleLL* DoublelyLinkedList::AddNodeFront(int key, std::string val)
     {
         DoubleLL* node = new DoubleLL(key, val, nullptr, nullptr);
         if(head_ != nullptr)
@@ -40,7 +40,7 @@ namespace LinkedList
             tail_ = node;
         }
         ++size_;
-        return true;
+        return head_;
     }
 
     bool DoublelyLinkedList::AddNode(int key, std::string val, int position)
@@ -291,7 +291,7 @@ namespace LinkedList
         return nullptr;
     }
 
-    int DoublelyLinkedList::GetSize()
+    size_t DoublelyLinkedList::GetSize()
     {
         return size_;
     }
