@@ -1,4 +1,4 @@
-#include "../inc/DoublelyLinkedList.hpp"
+#include "DoublelyLinkedList.hpp"
 #include <iostream>
 
 namespace LinkedList

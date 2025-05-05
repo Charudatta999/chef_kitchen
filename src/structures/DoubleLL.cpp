@@ -1,4 +1,4 @@
-#include "../inc/DoubleLL.hpp"
+#include "DoubleLL.hpp"
 
 namespace LinkedList
 {
