@@ -1,7 +1,7 @@
 #include "Recipes.hpp"
 #include <iostream>
 
-namespace Resturant
+namespace Restaurant
 {
     Recipes::Recipes() : idCount_(0)
     {
@@ -41,7 +41,7 @@ namespace Resturant
         return false;
     }
 
-    bool Recipes::RemoveRecipe(const std::string& recipeName)
+    bool Recipes::RemoveRecipe(const std::string &recipeName)
     {
         if (!DoWeHaveTheRecipe(recipeName))
         {
@@ -52,7 +52,6 @@ namespace Resturant
         recipeLookup_.erase(recipeName);
         galacticCookBook_.erase(id);
         return true;
-        
     }
 
     const bool Recipes::GetIngredientList(std::string recipeName, std::unordered_map<std::string, size_t> &ingredientList)

@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
-namespace Resturant
+namespace Restaurant
 {
     class Recipes
     {
