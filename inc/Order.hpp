@@ -23,10 +23,10 @@ namespace Restaurant
         std::string recipeName_;
         size_t quantity_;
         OrderStatus status_;
-        std::chrono::system_clock::time_point placedTime_;
+        std::chrono::time_point<std::chrono::system_clock> placedTime_;
     public:
         //Constructor
-        Order(size_t id, std::string recipeName, size_t quantity, OrderStatus status);
+        Order(size_t id, std::string recipeName, size_t quantity);
         //Non Copyable
         Order(const Order&) = delete;
         Order& operator=(const Order&) = delete;
