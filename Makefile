@@ -5,17 +5,19 @@ LDFLAGS = -lgtest -lgtest_main -pthread
 
 # Directories
 SRC_DIR = src
+STRUCT_SRC_DIR= $(SRC_DIR)/structures
 INC_DIR = inc
 OBJ_DIR = obj
 BIN_DIR = bin
 TEST_DIR = test
 
 # Source files
-SRCS = $(SRC_DIR)/DoubleLL.cpp $(SRC_DIR)/DoublelyLinkedList.cpp $(SRC_DIR)/Lru.cpp
+STRUCT_SRC = $(STRUCT_DIR)/DoubleLL.cpp $(STRUCT_DIR)/DoublelyLinkedList.cpp $(STRUCT_DIR)/Lru.cpp
 TEST_SRCS = $(TEST_DIR)/maintest.cpp $(TEST_DIR)/DoublelyLinkedListTest.cpp $(TEST_DIR)/LruTests.cpp
 
+SRCS = $(STRUCT_SRC)
 # Object files
-OBJS = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
+OBJS = $(patsubst $(STRUCT_SRC)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
 TEST_OBJS = $(patsubst $(TEST_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(TEST_SRCS))
 
 # Executable

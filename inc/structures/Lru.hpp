@@ -15,12 +15,11 @@ namespace LRU
     
     class Lru
     {
-        friend class ::LruTest;
+
     private:
         size_t capacity_;
         std::unordered_map<int, LinkedList::DoubleLL *> index_;
         std::unique_ptr<LinkedList::DoublelyLinkedList> usageOrder_;
-    public:
         bool Evict();
         bool Remove(int key);
         bool HasCapacity();
