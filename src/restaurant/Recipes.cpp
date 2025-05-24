@@ -1,7 +1,7 @@
 #include "Recipes.hpp"
 #include <iostream>
 
-namespace Restaurant
+namespace restaurant
 {
     Recipes::Recipes() : idCount_(0)
     {

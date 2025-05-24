@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
-namespace Restaurant
+namespace restaurant
 {
     class Recipes
     {
@@ -31,7 +31,7 @@ namespace Restaurant
         bool DoWeHaveTheRecipe(const std::string &recipeName) const;
         const bool GetIngredientList(std::string recipeName, std::unordered_map<std::string, size_t> &ingredientList);
         bool AddRecipe(const std::string &recipeName, const std::unordered_map<std::string, size_t> &ingredients);
-        bool RemoveRecipe(const std::string& recipeName);
+        bool RemoveRecipe(const std::string &recipeName);
     };
 }
 #endif

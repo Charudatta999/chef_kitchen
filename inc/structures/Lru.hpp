@@ -8,8 +8,6 @@
 #include <memory>
 #include <string>
 
-class LruTest;
-    
 namespace LRU
 {
     
