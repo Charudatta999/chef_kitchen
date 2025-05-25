@@ -28,3 +28,4 @@ gcovr_output/
 # Build directories
 bin/
 obj/
+deps/

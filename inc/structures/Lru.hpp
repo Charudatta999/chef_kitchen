@@ -22,12 +22,11 @@ namespace LRU
         bool Remove(int key);
         bool HasCapacity();
         bool IsKeyValuePresent(int key, const std::string &value) const;
-        bool Get(int key, std::string &value);
         size_t GetUsageOrderSize();
 
     public:
         const std::string Get(int key);
-
+        bool Get(int key, std::string &value);
         bool Put(int key, const std::string &value);
         size_t GetCacheSize();
         void ClearCache();
