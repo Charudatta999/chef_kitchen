@@ -12,7 +12,7 @@ namespace LRU
     {
         return usageOrder_->GetSize();
     }
-    
+
     bool Lru::HasCapacity()
     {
         if(capacity_ > usageOrder_->GetSize())
@@ -88,7 +88,7 @@ namespace LRU
         }
 
         usageOrder_->MoveNodeFront(node);
-        
+
         value = node->val_;
 
         return true;
