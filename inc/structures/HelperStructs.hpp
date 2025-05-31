@@ -1,23 +1,26 @@
 #include <string>
 #include <vector>
 #include <chrono>
-namespace restaurant
-{
+#include <tuple>
 
-struct Ingredient
+namespace inventory
 {
-    std::string name_;
-    size_t quantity_;
-    bool perishable_;
-    std::chrono::system_clock::time_point purchaseDate_;
-    std::chrono::system_clock::time_point expiryDate_;
-    Ingredient
-            ( 
-                std::string& name,size_t& quantity, bool perishable = false,
+    struct Item
+    {
+        std::string name_;
+        size_t totalQuantity_;
+        bool perishable_;
+        std::string unit_;
+        std::vector<std::tuple<std::chrono::system_clock::time_point,std::chrono::system_clock::time_point,size_t>> purchaseRecord_;
+        std::chrono::system_clock::time_point expiryDate_;
+        bool operator ==(Item& item);
+        Item
+            (
+                std::string &name, size_t &quantity,
+                bool perishable = false, std::string &unit,
                 std::chrono::system_clock::time_point purchaseDate = std::chrono::system_clock::now(),
-                std::chrono::system_clock::time_point expiryDate = std::chrono::system_clock::now()
-            )
-            :name_(name), quantity_(quantity), perishable_(perishable), purchaseDate_(purchaseDate), expiryDate_(expiryDate){}
-};
+                std::chrono::system_clock::time_point expiryDate = std::chrono::system_clock::time_point::min()
+            );
+    };
 
 }
