@@ -31,20 +31,20 @@ $(TEST_EXEC): $(OBJS) $(TEST_OBJS) | $(BIN_DIR)
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 # Compile source files to object files with explicit dependencies
-$(OBJ_DIR)/DoubleLL.o: $(SRC_DIR)/DoubleLL.cpp $(INC_DIR)/DoubleLL.hpp | $(OBJ_DIR)
+$(OBJ_DIR)/DoubleLL.o: $(SRC_DIR)/structures/DoubleLL.cpp | $(OBJ_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(OBJ_DIR)/DoublelyLinkedList.o: $(SRC_DIR)/DoublelyLinkedList.cpp $(INC_DIR)/DoublelyLinkedList.hpp $(INC_DIR)/DoubleLL.hpp | $(OBJ_DIR)
+$(OBJ_DIR)/DoublelyLinkedList.o: $(SRC_DIR)/structures/DoublelyLinkedList.cpp | $(OBJ_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(OBJ_DIR)/Lru.o: $(SRC_DIR)/Lru.cpp $(INC_DIR)/Lru.hpp $(INC_DIR)/DoublelyLinkedList.hpp | $(OBJ_DIR)
+$(OBJ_DIR)/Lru.o: $(SRC_DIR)/structures/Lru.cpp | $(OBJ_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Compile test files to object files with explicit dependencies
 $(OBJ_DIR)/maintest.o: $(TEST_DIR)/maintest.cpp | $(OBJ_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(OBJ_DIR)/DoublelyLinkedListTest.o: $(TEST_DIR)/DoublelyLinkedListTest.cpp $(INC_DIR)/DoublelyLinkedList.hpp | $(OBJ_DIR)
+$(OBJ_DIR)/DoublelyLinkedListTest.o: $(TEST_DIR)/DoublelyLinkedListTest.cpp | $(OBJ_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/LruTests.o: $(TEST_DIR)/LruTests.cpp $(INC_DIR)/Lru.hpp | $(OBJ_DIR)

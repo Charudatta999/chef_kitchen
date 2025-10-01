@@ -1,7 +1,7 @@
 #ifndef STRING_UTIL_UUID_GEN_HEADER
 #define STRING_UTIL_UUID_GEN_HEADER
 
-#include <Poco/UUIDGenerator.h>
+#include "Poco/UUIDGenerator.h"
 
 namespace util
 {

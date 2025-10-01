@@ -1,0 +1,2 @@
+/usr/bin/ar qc libchef_kitchen_lib.a CMakeFiles/chef_kitchen_lib.dir/src/structures/DoubleLL.cpp.o CMakeFiles/chef_kitchen_lib.dir/src/structures/DoublelyLinkedList.cpp.o CMakeFiles/chef_kitchen_lib.dir/src/structures/HelperStructs.cpp.o CMakeFiles/chef_kitchen_lib.dir/src/structures/Lru.cpp.o CMakeFiles/chef_kitchen_lib.dir/src/restaurant/Inventory.cpp.o CMakeFiles/chef_kitchen_lib.dir/src/restaurant/Order.cpp.o CMakeFiles/chef_kitchen_lib.dir/src/restaurant/Recipes.cpp.o CMakeFiles/chef_kitchen_lib.dir/src/utils/StringUtils.cpp.o
+/usr/bin/ranlib libchef_kitchen_lib.a

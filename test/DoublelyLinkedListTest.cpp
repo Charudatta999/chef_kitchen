@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
-#include "../inc/DoublelyLinkedList.hpp"
+#include "gtest/gtest.h"
+#include "stturctures/DoublelyLinkedList.hpp"
 
 namespace LinkedList {
 

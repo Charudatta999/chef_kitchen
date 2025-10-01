@@ -1,0 +1,77 @@
+[
+{
+  "directory": "/mnt/d/cjadhav/Work/chef_kitchen/build",
+  "command": "/usr/bin/g++  -I/mnt/d/cjadhav/Work/chef_kitchen/inc -I/mnt/d/cjadhav/Work/chef_kitchen/inc/structures -I/mnt/d/cjadhav/Work/chef_kitchen/inc/restaurant -I/mnt/d/cjadhav/Work/chef_kitchen/inc/utils -I/mnt/d/cjadhav/Work/chef_kitchen/deps-inc/linux -g -g -fprofile-arcs -ftest-coverage -std=c++17 -Wall -O0 --coverage -std=gnu++17 -o CMakeFiles/chef_kitchen_lib.dir/src/structures/DoubleLL.cpp.o -c /mnt/d/cjadhav/Work/chef_kitchen/src/structures/DoubleLL.cpp",
+  "file": "/mnt/d/cjadhav/Work/chef_kitchen/src/structures/DoubleLL.cpp"
+},
+{
+  "directory": "/mnt/d/cjadhav/Work/chef_kitchen/build",
+  "command": "/usr/bin/g++  -I/mnt/d/cjadhav/Work/chef_kitchen/inc -I/mnt/d/cjadhav/Work/chef_kitchen/inc/structures -I/mnt/d/cjadhav/Work/chef_kitchen/inc/restaurant -I/mnt/d/cjadhav/Work/chef_kitchen/inc/utils -I/mnt/d/cjadhav/Work/chef_kitchen/deps-inc/linux -g -g -fprofile-arcs -ftest-coverage -std=c++17 -Wall -O0 --coverage -std=gnu++17 -o CMakeFiles/chef_kitchen_lib.dir/src/structures/DoublelyLinkedList.cpp.o -c /mnt/d/cjadhav/Work/chef_kitchen/src/structures/DoublelyLinkedList.cpp",
+  "file": "/mnt/d/cjadhav/Work/chef_kitchen/src/structures/DoublelyLinkedList.cpp"
+},
+{
+  "directory": "/mnt/d/cjadhav/Work/chef_kitchen/build",
+  "command": "/usr/bin/g++  -I/mnt/d/cjadhav/Work/chef_kitchen/inc -I/mnt/d/cjadhav/Work/chef_kitchen/inc/structures -I/mnt/d/cjadhav/Work/chef_kitchen/inc/restaurant -I/mnt/d/cjadhav/Work/chef_kitchen/inc/utils -I/mnt/d/cjadhav/Work/chef_kitchen/deps-inc/linux -g -g -fprofile-arcs -ftest-coverage -std=c++17 -Wall -O0 --coverage -std=gnu++17 -o CMakeFiles/chef_kitchen_lib.dir/src/structures/HelperStructs.cpp.o -c /mnt/d/cjadhav/Work/chef_kitchen/src/structures/HelperStructs.cpp",
+  "file": "/mnt/d/cjadhav/Work/chef_kitchen/src/structures/HelperStructs.cpp"
+},
+{
+  "directory": "/mnt/d/cjadhav/Work/chef_kitchen/build",
+  "command": "/usr/bin/g++  -I/mnt/d/cjadhav/Work/chef_kitchen/inc -I/mnt/d/cjadhav/Work/chef_kitchen/inc/structures -I/mnt/d/cjadhav/Work/chef_kitchen/inc/restaurant -I/mnt/d/cjadhav/Work/chef_kitchen/inc/utils -I/mnt/d/cjadhav/Work/chef_kitchen/deps-inc/linux -g -g -fprofile-arcs -ftest-coverage -std=c++17 -Wall -O0 --coverage -std=gnu++17 -o CMakeFiles/chef_kitchen_lib.dir/src/structures/Lru.cpp.o -c /mnt/d/cjadhav/Work/chef_kitchen/src/structures/Lru.cpp",
+  "file": "/mnt/d/cjadhav/Work/chef_kitchen/src/structures/Lru.cpp"
+},
+{
+  "directory": "/mnt/d/cjadhav/Work/chef_kitchen/build",
+  "command": "/usr/bin/g++  -I/mnt/d/cjadhav/Work/chef_kitchen/inc -I/mnt/d/cjadhav/Work/chef_kitchen/inc/structures -I/mnt/d/cjadhav/Work/chef_kitchen/inc/restaurant -I/mnt/d/cjadhav/Work/chef_kitchen/inc/utils -I/mnt/d/cjadhav/Work/chef_kitchen/deps-inc/linux -g -g -fprofile-arcs -ftest-coverage -std=c++17 -Wall -O0 --coverage -std=gnu++17 -o CMakeFiles/chef_kitchen_lib.dir/src/restaurant/Inventory.cpp.o -c /mnt/d/cjadhav/Work/chef_kitchen/src/restaurant/Inventory.cpp",
+  "file": "/mnt/d/cjadhav/Work/chef_kitchen/src/restaurant/Inventory.cpp"
+},
+{
+  "directory": "/mnt/d/cjadhav/Work/chef_kitchen/build",
+  "command": "/usr/bin/g++  -I/mnt/d/cjadhav/Work/chef_kitchen/inc -I/mnt/d/cjadhav/Work/chef_kitchen/inc/structures -I/mnt/d/cjadhav/Work/chef_kitchen/inc/restaurant -I/mnt/d/cjadhav/Work/chef_kitchen/inc/utils -I/mnt/d/cjadhav/Work/chef_kitchen/deps-inc/linux -g -g -fprofile-arcs -ftest-coverage -std=c++17 -Wall -O0 --coverage -std=gnu++17 -o CMakeFiles/chef_kitchen_lib.dir/src/restaurant/Order.cpp.o -c /mnt/d/cjadhav/Work/chef_kitchen/src/restaurant/Order.cpp",
+  "file": "/mnt/d/cjadhav/Work/chef_kitchen/src/restaurant/Order.cpp"
+},
+{
+  "directory": "/mnt/d/cjadhav/Work/chef_kitchen/build",
+  "command": "/usr/bin/g++  -I/mnt/d/cjadhav/Work/chef_kitchen/inc -I/mnt/d/cjadhav/Work/chef_kitchen/inc/structures -I/mnt/d/cjadhav/Work/chef_kitchen/inc/restaurant -I/mnt/d/cjadhav/Work/chef_kitchen/inc/utils -I/mnt/d/cjadhav/Work/chef_kitchen/deps-inc/linux -g -g -fprofile-arcs -ftest-coverage -std=c++17 -Wall -O0 --coverage -std=gnu++17 -o CMakeFiles/chef_kitchen_lib.dir/src/restaurant/Recipes.cpp.o -c /mnt/d/cjadhav/Work/chef_kitchen/src/restaurant/Recipes.cpp",
+  "file": "/mnt/d/cjadhav/Work/chef_kitchen/src/restaurant/Recipes.cpp"
+},
+{
+  "directory": "/mnt/d/cjadhav/Work/chef_kitchen/build",
+  "command": "/usr/bin/g++  -I/mnt/d/cjadhav/Work/chef_kitchen/inc -I/mnt/d/cjadhav/Work/chef_kitchen/inc/structures -I/mnt/d/cjadhav/Work/chef_kitchen/inc/restaurant -I/mnt/d/cjadhav/Work/chef_kitchen/inc/utils -I/mnt/d/cjadhav/Work/chef_kitchen/deps-inc/linux -g -g -fprofile-arcs -ftest-coverage -std=c++17 -Wall -O0 --coverage -std=gnu++17 -o CMakeFiles/chef_kitchen_lib.dir/src/utils/StringUtils.cpp.o -c /mnt/d/cjadhav/Work/chef_kitchen/src/utils/StringUtils.cpp",
+  "file": "/mnt/d/cjadhav/Work/chef_kitchen/src/utils/StringUtils.cpp"
+},
+{
+  "directory": "/mnt/d/cjadhav/Work/chef_kitchen/build",
+  "command": "/usr/bin/g++  -I/mnt/d/cjadhav/Work/chef_kitchen/inc -I/mnt/d/cjadhav/Work/chef_kitchen/inc/structures -I/mnt/d/cjadhav/Work/chef_kitchen/inc/restaurant -I/mnt/d/cjadhav/Work/chef_kitchen/inc/utils -I/mnt/d/cjadhav/Work/chef_kitchen/deps-inc/linux -isystem /mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googletest/include -isystem /mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googletest -g -g -fprofile-arcs -ftest-coverage -std=c++17 -Wall -O0 --coverage -std=gnu++17 -o CMakeFiles/chef_kitchen_tests.dir/test/DoublelyLinkedListTest.cpp.o -c /mnt/d/cjadhav/Work/chef_kitchen/test/DoublelyLinkedListTest.cpp",
+  "file": "/mnt/d/cjadhav/Work/chef_kitchen/test/DoublelyLinkedListTest.cpp"
+},
+{
+  "directory": "/mnt/d/cjadhav/Work/chef_kitchen/build",
+  "command": "/usr/bin/g++  -I/mnt/d/cjadhav/Work/chef_kitchen/inc -I/mnt/d/cjadhav/Work/chef_kitchen/inc/structures -I/mnt/d/cjadhav/Work/chef_kitchen/inc/restaurant -I/mnt/d/cjadhav/Work/chef_kitchen/inc/utils -I/mnt/d/cjadhav/Work/chef_kitchen/deps-inc/linux -isystem /mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googletest/include -isystem /mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googletest -g -g -fprofile-arcs -ftest-coverage -std=c++17 -Wall -O0 --coverage -std=gnu++17 -o CMakeFiles/chef_kitchen_tests.dir/test/LruTests.cpp.o -c /mnt/d/cjadhav/Work/chef_kitchen/test/LruTests.cpp",
+  "file": "/mnt/d/cjadhav/Work/chef_kitchen/test/LruTests.cpp"
+},
+{
+  "directory": "/mnt/d/cjadhav/Work/chef_kitchen/build",
+  "command": "/usr/bin/g++  -I/mnt/d/cjadhav/Work/chef_kitchen/inc -I/mnt/d/cjadhav/Work/chef_kitchen/inc/structures -I/mnt/d/cjadhav/Work/chef_kitchen/inc/restaurant -I/mnt/d/cjadhav/Work/chef_kitchen/inc/utils -I/mnt/d/cjadhav/Work/chef_kitchen/deps-inc/linux -isystem /mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googletest/include -isystem /mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googletest -g -g -fprofile-arcs -ftest-coverage -std=c++17 -Wall -O0 --coverage -std=gnu++17 -o CMakeFiles/chef_kitchen_tests.dir/test/maintest.cpp.o -c /mnt/d/cjadhav/Work/chef_kitchen/test/maintest.cpp",
+  "file": "/mnt/d/cjadhav/Work/chef_kitchen/test/maintest.cpp"
+},
+{
+  "directory": "/mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-build/googlemock",
+  "command": "/usr/bin/g++  -I/mnt/d/cjadhav/Work/chef_kitchen/inc -I/mnt/d/cjadhav/Work/chef_kitchen/inc/structures -I/mnt/d/cjadhav/Work/chef_kitchen/inc/restaurant -I/mnt/d/cjadhav/Work/chef_kitchen/inc/utils -I/mnt/d/cjadhav/Work/chef_kitchen/deps-inc/linux -I/mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googlemock/include -I/mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googlemock -isystem /mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googletest/include -isystem /mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googletest -g -Wall -Wshadow -Wundef -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -g -fprofile-arcs -ftest-coverage -std=c++17 -Wall -O0 --coverage -std=c++17 -o CMakeFiles/gmock.dir/src/gmock-all.cc.o -c /mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googlemock/src/gmock-all.cc",
+  "file": "/mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googlemock/src/gmock-all.cc"
+},
+{
+  "directory": "/mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-build/googlemock",
+  "command": "/usr/bin/g++  -isystem /mnt/d/cjadhav/Work/chef_kitchen/inc -isystem /mnt/d/cjadhav/Work/chef_kitchen/inc/structures -isystem /mnt/d/cjadhav/Work/chef_kitchen/inc/restaurant -isystem /mnt/d/cjadhav/Work/chef_kitchen/inc/utils -isystem /mnt/d/cjadhav/Work/chef_kitchen/deps-inc/linux -isystem /mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googlemock/include -isystem /mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googlemock -isystem /mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googletest/include -isystem /mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googletest -g -Wall -Wshadow -Wundef -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -g -fprofile-arcs -ftest-coverage -std=c++17 -Wall -O0 --coverage -std=c++17 -o CMakeFiles/gmock_main.dir/src/gmock_main.cc.o -c /mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googlemock/src/gmock_main.cc",
+  "file": "/mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googlemock/src/gmock_main.cc"
+},
+{
+  "directory": "/mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-build/googletest",
+  "command": "/usr/bin/g++  -I/mnt/d/cjadhav/Work/chef_kitchen/inc -I/mnt/d/cjadhav/Work/chef_kitchen/inc/structures -I/mnt/d/cjadhav/Work/chef_kitchen/inc/restaurant -I/mnt/d/cjadhav/Work/chef_kitchen/inc/utils -I/mnt/d/cjadhav/Work/chef_kitchen/deps-inc/linux -I/mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googletest/include -I/mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googletest -g -Wall -Wshadow -Wundef -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -g -fprofile-arcs -ftest-coverage -std=c++17 -Wall -O0 --coverage -std=c++17 -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googletest/src/gtest-all.cc",
+  "file": "/mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googletest/src/gtest-all.cc"
+},
+{
+  "directory": "/mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-build/googletest",
+  "command": "/usr/bin/g++  -I/mnt/d/cjadhav/Work/chef_kitchen/inc -I/mnt/d/cjadhav/Work/chef_kitchen/inc/structures -I/mnt/d/cjadhav/Work/chef_kitchen/inc/restaurant -I/mnt/d/cjadhav/Work/chef_kitchen/inc/utils -I/mnt/d/cjadhav/Work/chef_kitchen/deps-inc/linux -isystem /mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googletest/include -isystem /mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googletest -g -Wall -Wshadow -Wundef -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -g -fprofile-arcs -ftest-coverage -std=c++17 -Wall -O0 --coverage -std=c++17 -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googletest/src/gtest_main.cc",
+  "file": "/mnt/d/cjadhav/Work/chef_kitchen/build/_deps/googletest-src/googletest/src/gtest_main.cc"
+}
+]

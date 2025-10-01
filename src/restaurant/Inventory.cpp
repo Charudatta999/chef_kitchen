@@ -1,7 +1,7 @@
 #include<iostream>
 
-#include "Inventory.hpp"
-#include "StringUtils.hpp"
+#include "restaurant/Inventory.hpp"
+#include "utils/StringUtils.hpp"
 namespace inventory
 {
     Inventory::Inventory()
